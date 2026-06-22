@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ead7bf" />
+  <title>Birthday Scrapbook Desk</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Lora:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <audio id="musicPlayer" preload="metadata"></audio>
+  <audio id="clickSound" preload="auto"></audio>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="floating-hearts" id="floatingHearts" aria-hidden="true"></div>
+
+  <main class="app" id="app">
+    <section class="intro" id="introScreen" aria-labelledby="introTitle">
+      <div class="intro-card paper-card">
+        <span class="tape tape-top"></span>
+        <p class="eyebrow">birthday scrapbook desk</p>
+        <h1 id="introTitle"></h1>
+        <p class="intro-copy" id="introSubtitle"></p>
+        <div class="intro-mini">
+          <span>✦ klik benda di meja</span>
+          <span>✦ kumpulkan stempel</span>
+          <span>✦ buka hadiah akhir</span>
+        </div>
+        <button class="primary-btn" id="startBtn">Mulai lihat-lihat ✨</button>
+      </div>
+    </section>
+
+    <section class="desk-shell hidden" id="deskScreen" aria-labelledby="deskTitle">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">meja scrapbook</p>
+          <h1 id="deskTitle"></h1>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" id="helpBtn" aria-label="Bantuan">?</button>
+          <button class="ghost-btn" id="themeBtn">Mode malam</button>
+        </div>
+      </header>
+
+      <section class="status-strip paper-card" aria-label="Progress scrapbook">
+        <div>
+          <p class="status-label">Stempel terkumpul</p>
+          <p class="status-text" id="progressText">0/5 benda dibuka</p>
+        </div>
+        <div class="stamp-rail" id="stampRail" aria-live="polite"></div>
+      </section>
+
+      <section class="desk-board" aria-label="Objek scrapbook interaktif">
+        <div class="desk-bg" aria-hidden="true">
+          <span class="corner-doodle one">✿</span>
+          <span class="corner-doodle two">✦</span>
+          <span class="corner-doodle three">♡</span>
+        </div>
+
+        <button class="desk-item item-polaroid" data-item="polaroid" aria-label="Buka polaroid memories">
+          <span class="mini-polaroid p1"></span>
+          <span class="mini-polaroid p2"></span>
+          <span class="mini-polaroid p3"></span>
+          <span class="item-title">Polaroid<br>Memories</span>
+          <span class="opened-mark">opened</span>
+        </button>
+
+        <button class="desk-item item-letter" data-item="letter" aria-label="Buka folded birthday letter">
+          <span class="fold-line"></span>
+          <span class="letter-heart">♥</span>
+          <span class="item-title">Folded<br>Letter</span>
+          <span class="opened-mark">opened</span>
+        </button>
+
+        <button class="desk-item item-kit" data-item="kit" aria-label="Buka little survival kit">
+          <span class="kit-lid"></span>
+          <span class="kit-front">✚</span>
+          <span class="kit-band"></span>
+          <span class="item-title">Survival<br>Kit</span>
+          <span class="opened-mark">opened</span>
+        </button>
+
+        <button class="desk-item item-seed" data-item="seed" aria-label="Buka seed packet">
+          <span class="seed-top"></span>
+          <span class="seed-illustration">✿</span>
+          <span class="seed-lines"></span>
+          <span class="item-title">Seed<br>Packet</span>
+          <span class="opened-mark">opened</span>
+        </button>
+
+        <button class="desk-item item-recipe" data-item="recipe" aria-label="Buka recipe card">
+          <span class="recipe-clip">⌕</span>
+          <span class="recipe-checks"></span>
+          <span class="item-title">Recipe<br>Card</span>
+          <span class="opened-mark">opened</span>
+        </button>
+
+        <button class="desk-item item-gift locked" data-item="gift" aria-label="Buka gift box final">
+          <span class="gift-ribbon vertical"></span>
+          <span class="gift-ribbon horizontal"></span>
+          <span class="gift-lock" id="giftLock">🔒</span>
+          <span class="item-title">Final<br>Gift</span>
+          <span class="opened-mark">opened</span>
+        </button>
+
+        <button class="secret-heart secret-one" data-secret="1" aria-label="Hati rahasia">♡</button>
+        <button class="secret-heart secret-two" data-secret="2" aria-label="Hati rahasia">♡</button>
+        <button class="secret-heart secret-three" data-secret="3" aria-label="Hati rahasia">♡</button>
+      </section>
+    </section>
+  </main>
+
+  <section class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <article class="modal-card paper-card" id="modalCard" tabindex="-1">
+      <button class="close-btn" data-close-modal aria-label="Tutup">×</button>
+      <div class="modal-content" id="modalContent"></div>
+    </article>
+  </section>
+
+  <section class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <button class="close-btn lightbox-close" id="closeLightbox" aria-label="Tutup foto">×</button>
+    <img id="lightboxImg" alt="Foto diperbesar" />
+  </section>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
