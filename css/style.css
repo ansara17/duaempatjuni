@@ -289,3 +289,42 @@ body.night .track-button{background:rgba(255,240,223,.08)}
   .cassette-panel{gap:16px}
   .cassette-big{height:190px}
 }
+/* PATCH: perbaikan kontras mode malam */
+body.night .item-polaroid .item-title,
+body.night .item-letter .item-title,
+body.night .item-jar .item-title,
+body.night .item-cassette .item-title {
+  color: #503b2f !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.28);
+}
+
+body.night .item-polaroid .item-title {
+  background: rgba(255,248,237,.94) !important;
+}
+
+body.night .cassette-label {
+  color: #6d4430 !important;
+}
+
+body.night .opened-mark {
+  background: rgba(255,248,237,.94) !important;
+  color: #b85f73 !important;
+  border-color: #b85f73 !important;
+}
+
+body.night .item-passport .item-title,
+body.night .item-gift .item-title {
+  color: #fff7ed !important;
+}
+
+body.night .item-passport .opened-mark {
+  background: rgba(67,52,86,.86) !important;
+  color: #f4cf83 !important;
+  border-color: #f4cf83 !important;
+}
+
+body.night .item-gift .opened-mark {
+  background: rgba(80,40,55,.64) !important;
+  color: #fff7ed !important;
+  border-color: #fff7ed !important;
+}
