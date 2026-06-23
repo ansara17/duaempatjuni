@@ -1379,3 +1379,95 @@ body.night .cake-builder{
   .cake-candle-small{bottom:188px}.candle-a{left:112px}.candle-b{right:112px}
   .sparkle-one{left:58px;bottom:202px}.sparkle-two{right:62px;bottom:202px}.sparkle-three{bottom:228px}
 }
+
+/* V3.6 PATCH — Survival Kit illustration rebuilt for Android/mobile stability */
+.survival-v36-layout{
+  display:grid;
+  grid-template-columns:minmax(250px,340px) 1fr;
+  gap:24px;
+  align-items:start;
+}
+.survival-v36-visual{
+  display:block!important;
+  width:100%;
+  min-width:0;
+}
+.survival-v36-scene{
+  position:relative;
+  min-height:360px;
+  width:100%;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 18% 14%,rgba(255,255,255,.9),transparent 22%),
+    radial-gradient(circle at 84% 20%,rgba(242,182,189,.26),transparent 30%),
+    linear-gradient(180deg,#fff8ed,#fff0df 70%,#f6ddc7);
+  border:1px dashed rgba(201,150,79,.34);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.45),0 18px 32px rgba(80,59,47,.09);
+}
+.survival-v36-scene:before{
+  content:'';
+  position:absolute;
+  left:20px;right:20px;bottom:72px;
+  height:54px;
+  border-radius:50%;
+  background:rgba(217,134,149,.10);
+  filter:blur(8px);
+}
+.svk-bg{position:absolute;pointer-events:none}
+.svk-bg-sun{right:28px;top:28px;width:54px;height:54px;border-radius:50%;background:radial-gradient(circle,#fff3b8,#f0c56d 58%,transparent 62%);opacity:.54}
+.svk-bg-cloud{width:64px;height:24px;border-radius:999px;background:rgba(255,255,255,.76);box-shadow:18px -8px 0 rgba(255,255,255,.72),34px 2px 0 rgba(255,255,255,.62)}
+.svk-bg-cloud.one{left:24px;top:44px}.svk-bg-cloud.two{right:44px;top:100px;transform:scale(.82);opacity:.64}
+.svk-character{
+  position:relative!important;
+  display:block!important;
+  width:min(285px,92%)!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:26px auto 0!important;
+  overflow:visible!important;
+  visibility:visible!important;
+  opacity:1!important;
+  z-index:2;
+}
+.svk-person{transform-origin:160px 260px;transition:transform .45s ease,filter .45s ease}
+.svk-mouth,.svk-brow,.svk-eye,.svk-blush,.svk-heart,.svk-sparkles{transition:opacity .35s ease,transform .35s ease}
+.svk-mouth{opacity:0}.mouth-sad{opacity:1}.svk-heart{font-size:28px;fill:#d98695;opacity:.22}.svk-sparkles{font-family:var(--font-hand);font-size:24px;fill:#d98695;opacity:.20}
+.survival-v36-scene[data-mood="1"] .svk-person{transform:translateY(-2px)}
+.survival-v36-scene[data-mood="2"] .svk-person{transform:translateY(-5px)}
+.survival-v36-scene[data-mood="3"] .svk-person{transform:translateY(-8px)}
+.survival-v36-scene[data-mood="4"] .svk-person{transform:translateY(-11px) rotate(-1deg)}
+.survival-v36-scene[data-mood="5"] .svk-person{transform:translateY(-14px) rotate(1deg);filter:drop-shadow(0 14px 18px rgba(217,134,149,.18))}
+.survival-v36-scene[data-mood="2"] .mouth-sad,.survival-v36-scene[data-mood="3"] .mouth-sad,.survival-v36-scene[data-mood="4"] .mouth-sad,.survival-v36-scene[data-mood="5"] .mouth-sad{opacity:0}
+.survival-v36-scene[data-mood="2"] .mouth-flat{opacity:1}.survival-v36-scene[data-mood="3"] .mouth-soft{opacity:1}.survival-v36-scene[data-mood="4"] .mouth-happy,.survival-v36-scene[data-mood="5"] .mouth-happy{opacity:1}
+.survival-v36-scene[data-mood="2"] .brow-left,.survival-v36-scene[data-mood="3"] .brow-left,.survival-v36-scene[data-mood="4"] .brow-left,.survival-v36-scene[data-mood="5"] .brow-left{transform:rotate(-10deg);transform-origin:142px 135px}
+.survival-v36-scene[data-mood="2"] .brow-right,.survival-v36-scene[data-mood="3"] .brow-right,.survival-v36-scene[data-mood="4"] .brow-right,.survival-v36-scene[data-mood="5"] .brow-right{transform:rotate(10deg);transform-origin:178px 135px}
+.survival-v36-scene[data-mood="4"] .svk-blush,.survival-v36-scene[data-mood="5"] .svk-blush{opacity:.82}
+.survival-v36-scene[data-mood="5"] .svk-eye{transform:translateY(4px) scaleY(.45)}
+.survival-v36-scene[data-mood="5"] .svk-heart,.survival-v36-scene[data-mood="5"] .svk-sparkles{opacity:1;animation:v36SoftPulse 1.5s ease-in-out infinite}
+@keyframes v36SoftPulse{50%{transform:scale(1.08);opacity:.72}}
+.mood-meter.v36{
+  position:absolute!important;
+  left:28px!important;right:28px!important;bottom:42px!important;
+  height:12px;border-radius:999px;background:rgba(80,59,47,.11);overflow:hidden;
+}
+.mood-meter.v36 span{display:block;height:100%;width:0;background:linear-gradient(90deg,#d98695,#f0c56d,#9aac8a);border-radius:inherit;transition:width .45s ease}
+.mood-text.v36{position:absolute!important;left:24px!important;right:24px!important;bottom:12px!important;text-align:center;font-family:var(--font-hand);font-size:1.08rem;color:#70483f;margin:0!important}
+.survival-v36-items{min-width:0}.survival-v36-items .kit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.night .survival-v36-scene{background:linear-gradient(180deg,rgba(255,248,237,.12),rgba(255,240,223,.08));border-color:rgba(255,248,237,.18)}
+body.night .mood-text.v36{color:#fff4e8}
+@media(max-width:900px){
+  .survival-v36-layout{display:grid!important;grid-template-columns:1fr!important;gap:16px!important}
+  .survival-v36-visual{order:-1!important;display:block!important;width:100%!important;min-height:0!important}
+  .survival-v36-scene{display:block!important;min-height:330px!important;width:100%!important;margin:0 auto!important;overflow:hidden!important}
+  .svk-character{width:min(250px,88%)!important;margin-top:14px!important}
+  .survival-v36-items .kit-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:560px){
+  .modal-card{max-height:calc(100dvh - 28px)!important;padding-bottom:96px!important}
+  .survival-v36-scene{min-height:305px!important;border-radius:22px!important}
+  .svk-character{width:min(218px,88%)!important;margin-top:10px!important}
+  .mood-meter.v36{left:18px!important;right:18px!important;bottom:38px!important}
+  .mood-text.v36{bottom:10px!important;font-size:.96rem!important}
+  .survival-v36-items .kit-grid{grid-template-columns:1fr!important}
+}

@@ -325,56 +325,63 @@
       <p class="eyebrow">little survival kit</p>
       <h2 class="modal-title">${escapeHtml(kit.title)}</h2>
       <p class="modal-subtitle">${escapeHtml(kit.subtitle)}<br><strong>${escapeHtml(kit.note)}</strong></p>
-      <div class="kit-layout animated-kit-layout survival-v35-layout">
-        <section class="kit-visual animated-kit-visual survival-v35-visual">
-          <div class="kit-mood-scene survival-v35-scene" id="kitMoodScene">
-            <div class="mood-sun"></div>
-            <div class="mood-cloud cloud-a"></div>
-            <div class="mood-cloud cloud-b"></div>
-            <svg class="character-svg mood-0" id="kitCharacter" viewBox="0 0 260 300" role="img" aria-label="Ilustrasi perempuan kecil yang mood-nya membaik">
+      <div class="survival-v36-layout">
+        <section class="survival-v36-visual" aria-label="Ilustrasi mood yang berubah">
+          <div class="survival-v36-scene" id="kitMoodScene" data-mood="0">
+            <div class="svk-bg svk-bg-sun"></div>
+            <div class="svk-bg svk-bg-cloud one"></div>
+            <div class="svk-bg svk-bg-cloud two"></div>
+            <svg class="svk-character" id="kitMoodCharacter" viewBox="0 0 320 300" role="img" aria-label="Ilustrasi perempuan kartun yang perlahan lebih bahagia">
               <defs>
-                <linearGradient id="skinGrad" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0" stop-color="#ffdfcf" />
-                  <stop offset="1" stop-color="#f0b89f" />
+                <linearGradient id="v36Skin" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ffe2d4" />
+                  <stop offset="1" stop-color="#f0b69e" />
                 </linearGradient>
-                <linearGradient id="dressGrad" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0" stop-color="#fff0dc" />
-                  <stop offset="1" stop-color="#d98695" />
+                <linearGradient id="v36Sweater" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#fff0df" />
+                  <stop offset="1" stop-color="#e8a1a9" />
                 </linearGradient>
-                <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
-                  <feDropShadow dx="0" dy="12" stdDeviation="8" flood-color="#503b2f" flood-opacity=".18" />
-                </filter>
+                <linearGradient id="v36Hair" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#1e1717" />
+                  <stop offset="1" stop-color="#47302d" />
+                </linearGradient>
               </defs>
-              <ellipse class="char-shadow" cx="130" cy="276" rx="62" ry="13" fill="rgba(80,59,47,.14)" />
-              <g class="char-body" filter="url(#softShadow)">
-                <path class="char-dress" d="M76 244c4-50 31-75 54-75s50 25 54 75c1 12-8 22-21 22H97c-13 0-22-10-21-22Z" fill="url(#dressGrad)" />
-                <path class="char-arm arm-left" d="M88 207c-22 12-29 25-22 34 6 8 20 2 35-14" fill="none" stroke="#f0b89f" stroke-width="15" stroke-linecap="round" />
-                <path class="char-arm arm-right" d="M172 207c22 12 29 25 22 34-6 8-20 2-35-14" fill="none" stroke="#f0b89f" stroke-width="15" stroke-linecap="round" />
-                <path class="char-hair-back" d="M78 130c0-44 24-73 52-73s52 29 52 73c0 36-15 73-52 73s-52-37-52-73Z" fill="#161213" />
-                <path class="char-hair-side left" d="M79 126c-16 20-16 63-3 91 20-18 28-51 24-86Z" fill="#211819" />
-                <path class="char-hair-side right" d="M181 126c16 20 16 63 3 91-20-18-28-51-24-86Z" fill="#211819" />
-                <ellipse class="char-face" cx="130" cy="134" rx="47" ry="52" fill="url(#skinGrad)" />
-                <path class="char-bang" d="M91 106c23-42 74-42 85-1-24-12-48-9-85 1Z" fill="#0e0c0d" />
-                <path class="char-cap" d="M82 89c19-26 76-37 105-5-17 13-74 22-105 5Z" fill="#d98695" />
-                <path class="char-cap-top" d="M111 66c18-13 45-10 58 7-18 9-39 12-58-7Z" fill="#b86478" opacity=".95" />
-                <path class="char-brow brow-left" d="M103 130q8-7 17 0" fill="none" stroke="#6e463f" stroke-width="4" stroke-linecap="round" />
-                <path class="char-brow brow-right" d="M140 130q9-7 18 0" fill="none" stroke="#6e463f" stroke-width="4" stroke-linecap="round" />
-                <ellipse class="char-eye eye-left" cx="112" cy="143" rx="5" ry="7" fill="#4e332f" />
-                <ellipse class="char-eye eye-right" cx="148" cy="143" rx="5" ry="7" fill="#4e332f" />
-                <ellipse class="char-blush blush-left" cx="104" cy="160" rx="10" ry="5" fill="#d98695" opacity=".22" />
-                <ellipse class="char-blush blush-right" cx="156" cy="160" rx="10" ry="5" fill="#d98695" opacity=".22" />
-                <path class="mouth mouth-sad" d="M114 174q16-14 32 0" fill="none" stroke="#6e463f" stroke-width="5" stroke-linecap="round" />
-                <path class="mouth mouth-flat" d="M116 171q14 2 28 0" fill="none" stroke="#6e463f" stroke-width="5" stroke-linecap="round" />
-                <path class="mouth mouth-soft" d="M116 169q14 12 28 0" fill="none" stroke="#6e463f" stroke-width="5" stroke-linecap="round" />
-                <path class="mouth mouth-happy" d="M111 166q19 20 38 0" fill="none" stroke="#6e463f" stroke-width="5" stroke-linecap="round" />
-                <text class="char-heart" x="130" y="224" text-anchor="middle">♡</text>
+              <ellipse cx="160" cy="268" rx="76" ry="14" fill="rgba(80,59,47,.16)" />
+              <g class="svk-person">
+                <path class="svk-hair-back" d="M88 141c0-52 32-86 72-86s72 34 72 86c0 54-26 93-72 93s-72-39-72-93Z" fill="url(#v36Hair)" />
+                <path d="M91 148c-14 21-15 58-1 78 20-18 26-49 22-83Z" fill="#2b1f1e" opacity=".95" />
+                <path d="M229 148c14 21 15 58 1 78-20-18-26-49-22-83Z" fill="#2b1f1e" opacity=".95" />
+                <path class="svk-sweater" d="M90 246c7-49 35-76 70-76s63 27 70 76c2 14-9 25-25 25h-90c-16 0-27-11-25-25Z" fill="url(#v36Sweater)" />
+                <path class="svk-arm left" d="M111 205c-28 18-38 34-30 44 8 10 26 1 47-20" fill="none" stroke="#f1b89f" stroke-width="18" stroke-linecap="round" />
+                <path class="svk-arm right" d="M209 205c28 18 38 34 30 44-8 10-26 1-47-20" fill="none" stroke="#f1b89f" stroke-width="18" stroke-linecap="round" />
+                <ellipse class="svk-face" cx="160" cy="137" rx="50" ry="55" fill="url(#v36Skin)" />
+                <path class="svk-bang" d="M113 112c24-41 77-47 97-4-30-8-55-6-97 4Z" fill="#171212" />
+                <path class="svk-hair-strand" d="M125 102c-7 18-4 35 7 45" fill="none" stroke="#2b1f1e" stroke-width="9" stroke-linecap="round" />
+                <path class="svk-hair-strand" d="M194 104c6 18 2 34-8 44" fill="none" stroke="#2b1f1e" stroke-width="9" stroke-linecap="round" />
+                <path class="svk-headband" d="M112 101c27-20 73-20 96 1" fill="none" stroke="#e69aa4" stroke-width="8" stroke-linecap="round" />
+                <path class="svk-brow brow-left" d="M132 135q10-8 21 0" fill="none" stroke="#70483f" stroke-width="4" stroke-linecap="round" />
+                <path class="svk-brow brow-right" d="M167 135q11-8 22 0" fill="none" stroke="#70483f" stroke-width="4" stroke-linecap="round" />
+                <ellipse class="svk-eye eye-left" cx="142" cy="149" rx="5.5" ry="7" fill="#4e332f" />
+                <ellipse class="svk-eye eye-right" cx="178" cy="149" rx="5.5" ry="7" fill="#4e332f" />
+                <ellipse class="svk-blush blush-left" cx="132" cy="166" rx="12" ry="6" fill="#d98695" opacity=".18" />
+                <ellipse class="svk-blush blush-right" cx="188" cy="166" rx="12" ry="6" fill="#d98695" opacity=".18" />
+                <path class="svk-mouth mouth-sad" d="M143 181q17-14 34 0" fill="none" stroke="#70483f" stroke-width="5" stroke-linecap="round" />
+                <path class="svk-mouth mouth-flat" d="M144 178q16 2 32 0" fill="none" stroke="#70483f" stroke-width="5" stroke-linecap="round" />
+                <path class="svk-mouth mouth-soft" d="M145 176q15 12 30 0" fill="none" stroke="#70483f" stroke-width="5" stroke-linecap="round" />
+                <path class="svk-mouth mouth-happy" d="M141 173q19 20 38 0" fill="none" stroke="#70483f" stroke-width="5" stroke-linecap="round" />
+                <text class="svk-heart" x="160" y="231" text-anchor="middle">♡</text>
+              </g>
+              <g class="svk-sparkles">
+                <text x="90" y="84">✦</text>
+                <text x="238" y="106">♡</text>
+                <text x="72" y="186">✧</text>
               </g>
             </svg>
-            <div class="mood-meter" aria-hidden="true"><span id="moodFill"></span></div>
-            <p class="mood-text" id="moodText">Mood: ${escapeHtml(kit.moodLabels?.[0] || 'masih mendung')}</p>
+            <div class="mood-meter v36" aria-hidden="true"><span id="moodFill"></span></div>
+            <p class="mood-text v36" id="moodText">Mood: ${escapeHtml(kit.moodLabels?.[0] || 'masih mendung')}</p>
           </div>
         </section>
-        <section>
+        <section class="survival-v36-items">
           <div class="kit-grid">${items}</div>
           <div class="kit-message" id="kitMessage">Pilih satu item kecil di atas. Setiap item akan membuat murungnya berkurang sedikit.</div>
         </section>
@@ -399,12 +406,11 @@
   }
 
   function updateKitMood(count, total, kit) {
-    const character = $('#kitCharacter');
     const scene = $('#kitMoodScene');
     const fill = $('#moodFill');
     const text = $('#moodText');
     const moodIndex = Math.min(5, Math.ceil((count / total) * 5));
-    if (character) character.setAttribute('class', `character-svg mood-${moodIndex}`);
+    if (scene) scene.dataset.mood = String(moodIndex);
     if (fill) fill.style.width = `${Math.round((count / total) * 100)}%`;
     if (text) text.textContent = `Mood: ${kit.moodLabels?.[moodIndex] || (count === total ? 'bahagia' : 'membaik')}`;
 
