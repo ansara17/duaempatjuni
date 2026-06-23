@@ -1,6 +1,9 @@
-Folder ini opsional.
+Masukkan file musik ke folder ini.
 
-Jika ingin ada efek suara saat tombol diklik, masukkan file:
-- click.mp3
+Nama file yang sudah disiapkan di js/config.js:
+- lagu1.mp3
+- lagu2.mp3
+- lagu3.mp3
+- click.mp3 (opsional untuk efek klik)
 
-Kalau tidak ada file click.mp3, website tetap berjalan normal.
+Jika nama file berbeda, ubah bagian tracks di js/config.js.

@@ -76,3 +76,8 @@ Kalau tidak ada, scrapbook tetap berjalan normal.
 4. Pilih Source: Deploy from a branch.
 5. Pilih Branch: main dan folder: / root.
 6. Simpan, lalu tunggu link GitHub Pages aktif.
+
+
+## Update V3.3
+
+Recipe Card diperbarui: mangkuk awalnya kosong, lalu bahan yang diklik masuk ke mangkuk, isi mangkuk makin penuh, dan setelah lengkap berubah menjadi makanan manis yang lebih appetizing.

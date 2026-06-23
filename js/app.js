@@ -7,7 +7,8 @@
     started: false,
     opened: new Set(),
     secretsFound: new Set(),
-    letterTimer: null
+    letterTimer: null,
+    currentTrack: 0
   };
 
   const els = {
@@ -25,6 +26,14 @@
     themeBtn: $('#themeBtn'),
     helpBtn: $('#helpBtn'),
     clickSound: $('#clickSound'),
+    musicPlayer: $('#musicPlayer'),
+    musicDock: $('#musicDock'),
+    musicToggle: $('#musicToggle'),
+    musicNext: $('#musicNext'),
+    musicTitle: $('#musicTitle'),
+    musicStatus: $('#musicStatus'),
+    musicProgress: $('#musicProgress'),
+    musicProgressFill: $('#musicProgressFill'),
     lightbox: $('#lightbox'),
     lightboxImg: $('#lightboxImg'),
     closeLightbox: $('#closeLightbox'),
@@ -48,6 +57,7 @@
     els.deskTitle.textContent = CONFIG.deskTitle;
 
     if (CONFIG.clickSound) els.clickSound.src = withCache(CONFIG.clickSound);
+    initMusicPlayer();
 
     bindEvents();
     updateProgress();
@@ -60,6 +70,9 @@
       state.started = true;
       els.introScreen.classList.add('hidden');
       els.deskScreen.classList.remove('hidden');
+      if (Array.isArray(CONFIG.tracks) && CONFIG.tracks.length) {
+        els.musicDock.classList.remove('hidden');
+      }
       confetti(18);
     });
 
@@ -92,6 +105,14 @@
       openHelp();
     });
 
+    els.musicToggle?.addEventListener('click', toggleMusic);
+    els.musicNext?.addEventListener('click', nextTrack);
+    els.musicPlayer?.addEventListener('play', updateMusicUI);
+    els.musicPlayer?.addEventListener('pause', updateMusicUI);
+    els.musicPlayer?.addEventListener('timeupdate', updateMusicUI);
+    els.musicPlayer?.addEventListener('ended', nextTrack);
+    els.musicProgress?.addEventListener('click', seekMusic);
+
     $$('.secret-heart').forEach((heart) => {
       heart.addEventListener('click', () => {
         tap();
@@ -109,6 +130,72 @@
     els.lightbox.addEventListener('click', (event) => {
       if (event.target === els.lightbox) closeLightbox();
     });
+  }
+
+  function initMusicPlayer() {
+    if (!Array.isArray(CONFIG.tracks) || CONFIG.tracks.length === 0) {
+      els.musicDock?.classList.add('hidden');
+      return;
+    }
+    loadTrack(0, false);
+    updateMusicUI();
+  }
+
+  function loadTrack(index, autoplay = false) {
+    const tracks = CONFIG.tracks || [];
+    if (!tracks.length) return;
+    state.currentTrack = (index + tracks.length) % tracks.length;
+    const track = tracks[state.currentTrack];
+    els.musicPlayer.src = withCache(track.file);
+    els.musicTitle.textContent = track.title || `Lagu ${state.currentTrack + 1}`;
+    els.musicStatus.textContent = 'Tekan play untuk memulai lagu';
+    els.musicProgressFill.style.width = '0%';
+    if (autoplay) {
+      els.musicPlayer.play().catch(() => {
+        els.musicStatus.textContent = 'Tekan play untuk memutar lagu';
+      });
+    }
+  }
+
+  function toggleMusic() {
+    tap();
+    if (!Array.isArray(CONFIG.tracks) || !CONFIG.tracks.length) {
+      els.musicStatus.textContent = 'Belum ada lagu di config.js';
+      return;
+    }
+    if (!els.musicPlayer.src) loadTrack(state.currentTrack, false);
+    if (els.musicPlayer.paused) {
+      els.musicPlayer.play().catch(() => {
+        els.musicStatus.textContent = 'Browser meminta kamu menekan play sekali lagi';
+      });
+    } else {
+      els.musicPlayer.pause();
+    }
+  }
+
+  function nextTrack() {
+    tap();
+    const wasPlaying = els.musicPlayer && !els.musicPlayer.paused;
+    loadTrack(state.currentTrack + 1, wasPlaying);
+  }
+
+  function seekMusic(event) {
+    if (!els.musicPlayer.duration) return;
+    const rect = els.musicProgress.getBoundingClientRect();
+    const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+    els.musicPlayer.currentTime = ratio * els.musicPlayer.duration;
+  }
+
+  function updateMusicUI() {
+    if (!els.musicPlayer || !els.musicToggle) return;
+    const tracks = CONFIG.tracks || [];
+    const track = tracks[state.currentTrack];
+    if (track) els.musicTitle.textContent = track.title || `Lagu ${state.currentTrack + 1}`;
+    els.musicToggle.textContent = els.musicPlayer.paused ? '▶' : '❚❚';
+    els.musicToggle.setAttribute('aria-label', els.musicPlayer.paused ? 'Putar musik' : 'Jeda musik');
+    els.musicStatus.textContent = els.musicPlayer.paused ? 'Musik dijeda / belum diputar' : 'Musik sedang diputar';
+    const progress = els.musicPlayer.duration ? (els.musicPlayer.currentTime / els.musicPlayer.duration) * 100 : 0;
+    els.musicProgressFill.style.width = `${progress}%`;
   }
 
   function openItem(item) {
@@ -244,17 +331,22 @@
             <div class="mood-sun"></div>
             <div class="mood-cloud cloud-a"></div>
             <div class="mood-cloud cloud-b"></div>
-            <div class="hijab-character mood-0" id="kitCharacter" aria-hidden="true">
-              <div class="hijab-back"></div>
-              <div class="hijab-tail"></div>
+            <div class="pashmina-character mood-0" id="kitCharacter" aria-hidden="true">
+              <div class="pashmina-back"></div>
+              <div class="pashmina-tail"></div>
+              <div class="pashmina-front"></div>
               <div class="face">
+                <span class="brow brow-left"></span>
+                <span class="brow brow-right"></span>
                 <span class="eye eye-left"></span>
                 <span class="eye eye-right"></span>
                 <span class="blush blush-left"></span>
                 <span class="blush blush-right"></span>
                 <span class="mouth"></span>
               </div>
-              <div class="shoulders"></div>
+              <div class="dress"></div>
+              <div class="hand hand-left"></div>
+              <div class="hand hand-right"></div>
             </div>
             <div class="mood-meter" aria-hidden="true"><span id="moodFill"></span></div>
             <p class="mood-text" id="moodText">Mood: ${escapeHtml(kit.moodLabels?.[0] || 'masih mendung')}</p>
@@ -290,7 +382,7 @@
     const fill = $('#moodFill');
     const text = $('#moodText');
     const moodIndex = Math.min(5, Math.ceil((count / total) * 5));
-    character.className = `hijab-character mood-${moodIndex}`;
+    character.className = `pashmina-character mood-${moodIndex}`;
     fill.style.width = `${Math.round((count / total) * 100)}%`;
     text.textContent = `Mood: ${kit.moodLabels?.[moodIndex] || (count === total ? 'bahagia' : 'membaik')}`;
 
@@ -393,9 +485,10 @@
 
   function renderRecipeCard() {
     const recipe = CONFIG.recipeCard;
+    const icons = ['✨', '🌿', '🍓', '☁️', '🫶', '🌙'];
     const ingredientButtons = recipe.ingredients.map((ingredient, index) => `
       <button class="ingredient-chip" data-ingredient="${index}" type="button">
-        <span>${['✨', '🌿', '😊', '☁️', '🫶', '🌙'][index % 6]}</span>
+        <span>${icons[index % icons.length]}</span>
         ${escapeHtml(ingredient)}
       </button>
     `).join('');
@@ -404,7 +497,7 @@
     openModal(`
       <p class="eyebrow">recipe card</p>
       <h2 class="modal-title">${escapeHtml(recipe.title)}</h2>
-      <p class="modal-subtitle">${escapeHtml(recipe.subtitle)}<br><strong>Klik bahan-bahannya agar masuk ke mangkuk.</strong></p>
+      <p class="modal-subtitle">${escapeHtml(recipe.subtitle)}<br><strong>Klik bahan-bahannya. Mangkuk kosongnya akan pelan-pelan berubah jadi makanan manis.</strong></p>
       <div class="recipe-layout animated-recipe-layout">
         <section class="recipe-card-main interactive-recipe-card">
           <span class="recipe-tape"></span>
@@ -412,10 +505,23 @@
           <div class="ingredient-list">${ingredientButtons}</div>
         </section>
         <section class="recipe-mixing-area">
-          <div class="mixing-bowl" id="mixingBowl">
+          <div class="mixing-bowl food-bowl" id="mixingBowl" aria-label="Mangkuk resep ulang tahun">
+            <div class="bowl-back-glow"></div>
+            <div class="bowl-fill" id="bowlFill"></div>
+            <div class="food-surface" id="foodSurface"></div>
+            <div class="final-food" id="finalFood" aria-hidden="true">
+              <span class="cream cream-a"></span>
+              <span class="cream cream-b"></span>
+              <span class="cream cream-c"></span>
+              <span class="topping berry-a">🍓</span>
+              <span class="topping berry-b">🫐</span>
+              <span class="topping cookie-a">🍪</span>
+              <span class="topping sparkle-a">✦</span>
+              <span class="topping sparkle-b">♡</span>
+            </div>
             <div class="bowl-rim"></div>
             <div class="bowl-body"></div>
-            <div class="bowl-fill" id="bowlFill"></div>
+            <div class="bowl-spoon"></div>
             <div class="steam steam-one">♡</div>
             <div class="steam steam-two">✦</div>
             <div class="steam steam-three">♡</div>
@@ -441,8 +547,7 @@
         mixed.add(index);
         button.classList.add('used');
         addIngredientToBowl(button, index);
-        $('#recipeMessage').textContent = `${mixed.size}/${total} bahan sudah masuk ke mangkuk.`;
-        $('#bowlFill').style.height = `${Math.min(78, 12 + mixed.size * 11)}%`;
+        updateRecipeBowl(mixed.size, total);
 
         if (mixed.size === total) {
           $('#mixingBowl').classList.add('complete');
@@ -450,18 +555,31 @@
           $('#recipeMessage').textContent = recipe.closing;
           confetti(42);
         } else {
+          $('#recipeMessage').textContent = `${mixed.size}/${total} bahan sudah masuk. Mangkuknya mulai terisi.`;
           confetti(8);
         }
       });
     });
   }
 
+  function updateRecipeBowl(count, total) {
+    const fill = $('#bowlFill');
+    const surface = $('#foodSurface');
+    const ratio = count / total;
+    const height = Math.round(8 + ratio * 78);
+    fill.style.height = `${height}%`;
+    surface.style.opacity = Math.min(1, ratio + .15);
+    surface.style.transform = `translateX(-50%) translateY(${34 - ratio * 34}px) scale(${.72 + ratio * .28})`;
+  }
+
   function addIngredientToBowl(button, index) {
     const bowl = $('#mixingBowl');
+    const symbols = ['✨', '🌿', '🍓', '☁️', '🫶', '🌙'];
     const chip = document.createElement('span');
     chip.className = 'bowl-chip';
-    chip.textContent = ['✨', '🌿', '😊', '☁️', '🫶', '🌙'][index % 6];
-    chip.style.left = `${26 + (index % 4) * 14}%`;
+    chip.textContent = symbols[index % symbols.length];
+    chip.style.left = `${24 + (index % 5) * 12}%`;
+    chip.style.setProperty('--settle-x', `${-18 + (index % 5) * 9}px`);
     chip.style.animationDelay = `${index * 20}ms`;
     bowl.appendChild(chip);
   }

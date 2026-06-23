@@ -15,6 +15,13 @@ window.SCRAPBOOK_CONFIG = {
 
   clickSound: "assets/music/click.mp3",
 
+  // Masukkan file MP3 ke assets/music, lalu samakan nama file di bawah ini.
+  tracks: [
+    { title: "Lagu Pertama", file: "assets/music/lagu1.mp3" },
+    { title: "Lagu Kedua", file: "assets/music/lagu2.mp3" },
+    { title: "Lagu Ketiga", file: "assets/music/lagu3.mp3" }
+  ],
+
   requiredToUnlockGift: 5,
 
   stamps: {

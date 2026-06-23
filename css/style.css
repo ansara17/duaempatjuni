@@ -507,3 +507,226 @@ body.night .garden-scene{background:linear-gradient(180deg,#273045 0%,#51415a 70
   .hijab-character{transform:translateX(-50%) scale(.88);bottom:62px}.hijab-character.mood-5{transform:translateX(-50%) translateY(-10px) scale(.88) rotate(1deg)}
   .kit-mood-scene{min-height:310px}.garden-scene{min-height:330px}.garden-flowers{bottom:78px}.garden-flower{height:140px}.animated-recipe-layout{gap:14px}.mixing-bowl{height:220px}.final-gift-stage{min-height:260px}
 }
+
+/* PATCH V3.2: pemutar musik global */
+.music-dock{
+  position:fixed;
+  left:50%;
+  bottom:14px;
+  transform:translateX(-50%);
+  z-index:70;
+  width:min(520px,calc(100vw - 24px));
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:12px 14px;
+  border-radius:24px;
+  background:rgba(255,248,237,.90);
+  border:1px solid rgba(80,59,47,.14);
+  box-shadow:0 18px 44px rgba(72,45,26,.22);
+  backdrop-filter:blur(14px);
+}
+.music-dock.hidden{display:none!important}
+.music-toggle,.music-next{
+  width:46px;height:46px;border:0;border-radius:50%;
+  display:grid;place-items:center;background:linear-gradient(135deg,var(--rose),var(--gold));
+  color:#fff;font-weight:900;box-shadow:0 10px 20px rgba(80,59,47,.18);
+}
+.music-next{background:rgba(255,255,255,.42);color:#6d4430;border:1px solid rgba(80,59,47,.12)}
+.music-info{min-width:0}.music-title{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#503b2f}.music-status{font-size:.82rem;color:#866b59;margin-top:2px}.music-progress{height:7px;border-radius:999px;background:rgba(80,59,47,.12);overflow:hidden;margin-top:8px;cursor:pointer}.music-progress span{display:block;height:100%;width:0%;border-radius:inherit;background:linear-gradient(90deg,var(--rose),var(--gold));transition:width .18s linear}
+body.night .music-dock{background:rgba(45,32,27,.92);border-color:rgba(255,240,223,.16);box-shadow:0 18px 44px rgba(0,0,0,.38)}
+body.night .music-title{color:#fff0df}body.night .music-status{color:#d7bd9d}body.night .music-next{background:rgba(255,240,223,.12);color:#fff0df;border-color:rgba(255,240,223,.16)}body.night .music-progress{background:rgba(255,240,223,.16)}
+
+/* PATCH V3.2: ilustrasi pashmina lebih jelas dan selalu muncul di mobile */
+.kit-mood-scene{display:block!important;min-height:390px!important;overflow:hidden!important}
+.pashmina-character{
+  --lift:0px;--char-scale:1;--char-rotate:0deg;
+  position:absolute;left:50%;bottom:70px;width:194px;height:258px;
+  transform:translateX(-50%) translateY(var(--lift)) scale(var(--char-scale)) rotate(var(--char-rotate));
+  transform-origin:50% 100%;transition:.55s ease;z-index:4;
+}
+.pashmina-back{position:absolute;left:22px;right:22px;top:8px;height:194px;border-radius:92px 92px 72px 72px;background:linear-gradient(145deg,#d99aab,#8e5a72);box-shadow:0 18px 34px rgba(80,59,47,.18)}
+.pashmina-front{position:absolute;left:25px;right:25px;top:30px;height:166px;border-radius:80px 80px 52px 52px;background:linear-gradient(150deg,#e9a9b8 0%,#bd7890 58%,#8e5a72 100%);z-index:2;box-shadow:inset 0 -10px 0 rgba(80,59,47,.07)}
+.pashmina-tail{position:absolute;right:18px;top:95px;width:62px;height:128px;border-radius:38px 18px 60px 18px;background:linear-gradient(160deg,#c58498,#77506b);transform:rotate(-8deg);box-shadow:0 14px 24px rgba(80,59,47,.14);z-index:1}
+.pashmina-character .face{position:absolute;left:50%;top:68px;width:92px;height:96px;transform:translateX(-50%);border-radius:46% 46% 48% 48%;background:linear-gradient(180deg,#ffdcca,#f1bda8);box-shadow:inset 0 -6px 0 rgba(139,77,65,.07);z-index:3;transition:.4s ease}
+.pashmina-character .brow{position:absolute;top:33px;width:18px;height:6px;border-radius:99px;border-top:3px solid #70483f;opacity:.65;transition:.35s ease}.pashmina-character .brow-left{left:18px;transform:rotate(18deg)}.pashmina-character .brow-right{right:18px;transform:rotate(-18deg)}
+.pashmina-character .eye{position:absolute;top:43px;width:10px;height:13px;border-radius:50%;background:#5e3d36;transition:.35s ease}.pashmina-character .eye-left{left:25px}.pashmina-character .eye-right{right:25px}
+.pashmina-character .blush{position:absolute;top:62px;width:18px;height:9px;border-radius:50%;background:rgba(217,134,149,.55);opacity:.22;transition:.4s ease}.pashmina-character .blush-left{left:16px}.pashmina-character .blush-right{right:16px}
+.pashmina-character .mouth{position:absolute;left:50%;top:75px;width:34px;height:16px;transform:translateX(-50%);transition:.35s ease}.pashmina-character .mouth:before{content:'';position:absolute;inset:0;border-top:4px solid #70483f;border-radius:50px 50px 0 0;transition:.35s ease}
+.pashmina-character .dress{position:absolute;left:36px;right:36px;bottom:3px;height:78px;border-radius:44px 44px 18px 18px;background:linear-gradient(145deg,#fff1dc,#e7adad);z-index:0;box-shadow:0 12px 24px rgba(80,59,47,.13)}
+.pashmina-character .hand{position:absolute;bottom:38px;width:30px;height:16px;border-radius:999px;background:#f1bda8;z-index:5;opacity:.85}.pashmina-character .hand-left{left:38px;transform:rotate(22deg)}.pashmina-character .hand-right{right:38px;transform:rotate(-22deg)}
+.pashmina-character.mood-1{--lift:-2px}.pashmina-character.mood-2{--lift:-5px}.pashmina-character.mood-3{--lift:-8px}.pashmina-character.mood-4{--lift:-11px;--char-rotate:-1deg}.pashmina-character.mood-5{--lift:-15px;--char-rotate:1deg}
+.pashmina-character.mood-2 .brow-left,.pashmina-character.mood-3 .brow-left,.pashmina-character.mood-4 .brow-left,.pashmina-character.mood-5 .brow-left{transform:rotate(-8deg)}.pashmina-character.mood-2 .brow-right,.pashmina-character.mood-3 .brow-right,.pashmina-character.mood-4 .brow-right,.pashmina-character.mood-5 .brow-right{transform:rotate(8deg)}
+.pashmina-character.mood-2 .mouth:before{border-top:0;border-bottom:4px solid #70483f;border-radius:0;transform:translateY(6px) scaleX(.72)}.pashmina-character.mood-3 .mouth:before{border-top:0;border-bottom:4px solid #70483f;border-radius:0 0 50px 50px;transform:translateY(2px)}.pashmina-character.mood-4 .mouth:before,.pashmina-character.mood-5 .mouth:before{border-top:0;border-bottom:5px solid #70483f;border-radius:0 0 50px 50px;transform:translateY(-2px)}.pashmina-character.mood-4 .blush,.pashmina-character.mood-5 .blush{opacity:.86}.pashmina-character.mood-5 .eye{height:7px;border-radius:99px;transform:translateY(4px)}
+@media(max-width:900px){.modal-card{padding-bottom:92px}.animated-kit-layout{display:grid!important;grid-template-columns:1fr!important}.animated-kit-visual{display:block!important;min-height:360px!important}.kit-mood-scene{min-height:350px!important}.pashmina-character{--char-scale:.88;bottom:66px}}
+@media(max-width:560px){.music-dock{bottom:10px;width:calc(100vw - 18px);grid-template-columns:auto 1fr auto;padding:10px;border-radius:20px}.music-toggle,.music-next{width:42px;height:42px}.music-status{font-size:.76rem}.animated-kit-visual{min-height:342px!important}.kit-mood-scene{min-height:326px!important}.pashmina-character{--char-scale:.78;bottom:60px}.mood-meter{left:18px!important;right:18px!important;bottom:42px!important}.mood-text{bottom:12px!important;font-size:.9rem!important}}
+
+/* PATCH V3.3: Recipe Card menjadi mangkuk makanan yang makin penuh */
+.food-bowl{
+  height:292px!important;
+  border-radius:30px!important;
+  background:
+    radial-gradient(circle at 28% 18%,rgba(255,255,255,.86),transparent 24%),
+    radial-gradient(circle at 78% 22%,rgba(247,211,119,.35),transparent 18%),
+    linear-gradient(180deg,#fffaf0 0%,#f6dfbf 58%,#e7bd84 100%)!important;
+  overflow:hidden!important;
+}
+.food-bowl:before{
+  content:'';
+  position:absolute;
+  left:28px;
+  right:28px;
+  top:34px;
+  height:58px;
+  border-radius:50%;
+  background:rgba(255,255,255,.38);
+  filter:blur(16px);
+}
+.bowl-back-glow{
+  position:absolute;
+  left:50%;
+  bottom:72px;
+  width:260px;
+  height:158px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,236,170,.42),transparent 68%);
+  transform:translateX(-50%) scale(.74);
+  opacity:.35;
+  transition:.45s ease;
+  z-index:0;
+}
+.food-bowl.complete .bowl-back-glow{opacity:.92;transform:translateX(-50%) scale(1.05)}
+.food-bowl .bowl-rim{
+  bottom:92px!important;
+  width:236px!important;
+  height:54px!important;
+  border:8px solid #d98695!important;
+  background:linear-gradient(180deg,#fffaf0,#ffe6df)!important;
+  box-shadow:0 12px 18px rgba(80,59,47,.12), inset 0 -8px 0 rgba(217,134,149,.10)!important;
+  z-index:7!important;
+}
+.food-bowl .bowl-body{
+  bottom:32px!important;
+  width:218px!important;
+  height:102px!important;
+  border-radius:0 0 96px 96px!important;
+  background:
+    radial-gradient(circle at 34% 20%,rgba(255,255,255,.35),transparent 18%),
+    linear-gradient(145deg,#f7c5c8,#d98695 58%,#bf6e80)!important;
+  box-shadow:inset 0 -16px 0 rgba(80,59,47,.12),0 20px 30px rgba(80,59,47,.16)!important;
+  z-index:6!important;
+}
+.food-bowl .bowl-fill{
+  left:50%!important;
+  bottom:96px!important;
+  width:202px!important;
+  max-height:92px!important;
+  border-radius:0 0 92px 92px!important;
+  background:
+    radial-gradient(circle at 30% 18%,rgba(255,255,255,.60),transparent 18%),
+    linear-gradient(180deg,#fff1b8 0%,#f6bd68 48%,#d48a49 100%)!important;
+  box-shadow:inset 0 -12px 0 rgba(126,74,36,.12)!important;
+  z-index:4!important;
+}
+.food-surface{
+  position:absolute;
+  left:50%;
+  bottom:164px;
+  width:180px;
+  height:40px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 28% 44%,#fffaf0 0 12%,transparent 13%),
+    radial-gradient(circle at 72% 40%,#f5d37e 0 12%,transparent 13%),
+    linear-gradient(180deg,#fff2c0,#f3b15e);
+  transform:translateX(-50%) translateY(34px) scale(.72);
+  opacity:0;
+  transition:.45s cubic-bezier(.2,1.2,.3,1);
+  z-index:5;
+  box-shadow:0 9px 18px rgba(80,59,47,.12);
+}
+.final-food{
+  position:absolute;
+  left:50%;
+  bottom:142px;
+  width:210px;
+  height:96px;
+  transform:translateX(-50%) translateY(26px) scale(.74);
+  opacity:0;
+  transition:.65s cubic-bezier(.2,1.28,.3,1);
+  z-index:8;
+  pointer-events:none;
+}
+.food-bowl.complete .final-food{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+.cream{
+  position:absolute;
+  bottom:24px;
+  width:68px;
+  height:50px;
+  border-radius:60% 60% 48% 48%;
+  background:linear-gradient(180deg,#fffef8,#ffe9cf);
+  box-shadow:inset -5px -8px 0 rgba(201,150,79,.10),0 8px 12px rgba(80,59,47,.10);
+}
+.cream-a{left:40px;transform:rotate(-8deg)}
+.cream-b{left:78px;bottom:38px;width:76px;height:58px;transform:rotate(4deg)}
+.cream-c{right:34px;transform:rotate(10deg)}
+.topping{position:absolute;font-size:1.52rem;filter:drop-shadow(0 5px 4px rgba(80,59,47,.14));animation:toppingPop .55s .35s cubic-bezier(.2,1.35,.3,1) both}
+.berry-a{left:44px;bottom:58px}.berry-b{right:50px;bottom:56px}.cookie-a{left:92px;bottom:72px}.sparkle-a{left:72px;bottom:104px;color:#e0ac50}.sparkle-b{right:72px;bottom:94px;color:#d98695}
+@keyframes toppingPop{from{transform:translateY(18px) scale(.2);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.food-bowl .bowl-spoon{
+  position:absolute;
+  right:58px;
+  bottom:104px;
+  width:12px;
+  height:138px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#fff7ed,#c9964f);
+  box-shadow:0 7px 12px rgba(80,59,47,.12);
+  transform:rotate(32deg) translateY(60px);
+  opacity:0;
+  transition:.65s ease;
+  z-index:9;
+}
+.food-bowl .bowl-spoon:before{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:-22px;
+  width:28px;
+  height:42px;
+  border-radius:50%;
+  background:linear-gradient(180deg,#fff7ed,#d8ae73);
+  transform:translateX(-50%);
+}
+.food-bowl.complete .bowl-spoon{opacity:1;transform:rotate(32deg) translateY(0)}
+.food-bowl.complete{animation:bowlHappy .72s ease both}
+@keyframes bowlHappy{0%,100%{transform:translateY(0)}35%{transform:translateY(-8px)}70%{transform:translateY(2px)}}
+.food-bowl .bowl-chip{
+  bottom:180px!important;
+  z-index:10!important;
+  animation:chipToFood .72s cubic-bezier(.2,1.25,.3,1) both!important;
+}
+@keyframes chipToFood{
+  0%{transform:translateY(-140px) translateX(-42px) rotate(-52deg) scale(.75);opacity:0}
+  58%{opacity:1}
+  100%{transform:translateY(16px) translateX(var(--settle-x,0)) rotate(0deg) scale(.95);opacity:1}
+}
+.food-bowl.complete .steam{color:#c8798a!important;font-size:1.9rem!important}
+body.night .food-bowl{
+  background:linear-gradient(180deg,#55485c 0%,#403648 58%,#2b2532 100%)!important;
+}
+body.night .food-bowl .bowl-rim{background:linear-gradient(180deg,#fff7ed,#f2d9b8)!important}
+body.night .food-surface{box-shadow:0 0 26px rgba(247,211,119,.20)}
+body.night .recipe-message{background:rgba(255,240,223,.10)}
+
+@media(max-width:560px){
+  .food-bowl{height:255px!important}
+  .food-bowl .bowl-rim{width:205px!important;height:48px!important;bottom:82px!important}
+  .food-bowl .bowl-body{width:190px!important;height:92px!important;bottom:28px!important}
+  .food-bowl .bowl-fill{width:178px!important;bottom:84px!important;max-height:82px!important}
+  .food-surface{width:160px;bottom:146px}
+  .final-food{width:186px;bottom:126px;transform:translateX(-50%) translateY(24px) scale(.68)}
+  .food-bowl.complete .final-food{transform:translateX(-50%) translateY(0) scale(.88)}
+  .food-bowl .bowl-spoon{right:48px;bottom:94px;height:118px}
+}
