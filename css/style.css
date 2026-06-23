@@ -1089,3 +1089,293 @@ body.night .recipe-message{background:rgba(255,240,223,.10)}
   .food-bowl.complete .final-food{transform:translateX(-50%) translateY(0) scale(.84)!important}
   .food-bowl .bowl-spoon{right:45px!important;bottom:88px!important;height:118px!important}
 }
+
+/* PATCH V3.5: Survival Kit memakai SVG karakter bertopi agar stabil di mobile */
+.survival-v35-layout{
+  align-items:start!important;
+}
+.survival-v35-visual{
+  display:block!important;
+  min-height:390px!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+.survival-v35-scene{
+  position:relative!important;
+  display:block!important;
+  min-height:370px!important;
+  overflow:hidden!important;
+  border-radius:28px!important;
+  visibility:visible!important;
+  opacity:1!important;
+  isolation:isolate!important;
+}
+.character-svg{
+  position:absolute!important;
+  left:50%!important;
+  top:22px!important;
+  width:min(260px,88%)!important;
+  height:auto!important;
+  max-height:300px!important;
+  transform:translateX(-50%) translateY(var(--char-lift,0)) rotate(var(--char-rotate,0deg))!important;
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  z-index:12!important;
+  pointer-events:none!important;
+  transition:transform .48s ease, filter .48s ease!important;
+}
+.character-svg .mouth,
+.character-svg .char-blush,
+.character-svg .char-heart,
+.character-svg .cake-sparkle{
+  transition:.35s ease;
+}
+.character-svg .mouth-flat,
+.character-svg .mouth-soft,
+.character-svg .mouth-happy{opacity:0}
+.character-svg.mood-1{--char-lift:-2px}
+.character-svg.mood-2{--char-lift:-5px}
+.character-svg.mood-3{--char-lift:-8px}
+.character-svg.mood-4{--char-lift:-11px;--char-rotate:-1deg}
+.character-svg.mood-5{--char-lift:-15px;--char-rotate:1deg;filter:drop-shadow(0 14px 18px rgba(217,134,149,.18))}
+.character-svg.mood-2 .mouth-sad,
+.character-svg.mood-3 .mouth-sad,
+.character-svg.mood-4 .mouth-sad,
+.character-svg.mood-5 .mouth-sad{opacity:0}
+.character-svg.mood-2 .mouth-flat{opacity:1}
+.character-svg.mood-3 .mouth-soft{opacity:1}
+.character-svg.mood-4 .mouth-happy,
+.character-svg.mood-5 .mouth-happy{opacity:1}
+.character-svg.mood-2 .brow-left,
+.character-svg.mood-3 .brow-left,
+.character-svg.mood-4 .brow-left,
+.character-svg.mood-5 .brow-left{transform:rotate(-8deg);transform-origin:112px 130px}
+.character-svg.mood-2 .brow-right,
+.character-svg.mood-3 .brow-right,
+.character-svg.mood-4 .brow-right,
+.character-svg.mood-5 .brow-right{transform:rotate(8deg);transform-origin:148px 130px}
+.character-svg.mood-4 .char-blush,
+.character-svg.mood-5 .char-blush{opacity:.85}
+.character-svg.mood-5 .char-eye{ry:3.5px;transform:translateY(4px)}
+.character-svg .char-heart{font-size:26px;fill:#d98695;opacity:.28}
+.character-svg.mood-5 .char-heart{opacity:1;animation:v35HeartPulse 1.4s ease-in-out infinite}
+@keyframes v35HeartPulse{50%{font-size:32px;opacity:.72}}
+
+@media(max-width:900px){
+  .survival-v35-layout{display:grid!important;grid-template-columns:1fr!important;gap:16px!important}
+  .survival-v35-visual{order:-1!important;min-height:340px!important}
+  .survival-v35-scene{min-height:320px!important}
+  .character-svg{top:12px!important;width:min(238px,92%)!important;max-height:282px!important}
+  .survival-v35-scene .mood-meter{left:18px!important;right:18px!important;bottom:42px!important}
+  .survival-v35-scene .mood-text{bottom:14px!important;font-size:.9rem!important}
+}
+@media(max-width:560px){
+  .survival-v35-visual{min-height:330px!important}
+  .survival-v35-scene{min-height:312px!important;border-radius:22px!important}
+  .character-svg{top:8px!important;width:min(218px,92%)!important;max-height:258px!important}
+  .survival-v35-scene .mood-meter{bottom:38px!important}
+  .survival-v35-scene .mood-text{bottom:10px!important}
+}
+
+/* PATCH V3.5: Recipe Card diganti menjadi animasi merangkai kue tart */
+.cake-recipe-layout{
+  grid-template-columns:minmax(280px,380px) 1fr!important;
+  align-items:start!important;
+}
+.cake-building-area{
+  display:grid;
+  gap:16px;
+}
+.cake-builder{
+  --cake-progress:0;
+  position:relative;
+  height:320px;
+  border-radius:30px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 24% 18%,rgba(255,255,255,.88),transparent 22%),
+    radial-gradient(circle at 72% 18%,rgba(255,220,155,.36),transparent 18%),
+    linear-gradient(180deg,#fffaf0 0%,#f4dfbf 58%,#e7c38f 100%);
+  border:1px solid rgba(80,59,47,.12);
+  box-shadow:0 16px 32px rgba(80,59,47,.10);
+  isolation:isolate;
+}
+.cake-builder:before{
+  content:"";
+  position:absolute;
+  inset:auto 18px 18px 18px;
+  height:90px;
+  border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(80,59,47,.13),transparent 68%);
+  filter:blur(1px);
+}
+.cake-stand{
+  position:absolute;
+  left:50%;
+  bottom:34px;
+  width:238px;
+  height:28px;
+  border-radius:50%;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg,#fff8ed,#dec39b);
+  border:1px solid rgba(80,59,47,.13);
+  box-shadow:0 14px 18px rgba(80,59,47,.12);
+  z-index:2;
+}
+.cake-plate-small{
+  position:absolute;
+  left:50%;
+  bottom:54px;
+  width:184px;
+  height:18px;
+  border-radius:50%;
+  transform:translateX(-50%);
+  background:rgba(255,248,237,.72);
+  z-index:3;
+}
+.cake-layer,.cake-cream,.cake-drip,.cake-topping,.cake-candle-small,.cake-sparkle{
+  position:absolute;
+  opacity:0;
+  transform:translateY(28px) scale(.88);
+  transition:.55s cubic-bezier(.2,1.25,.3,1);
+}
+.cake-layer{
+  left:50%;
+  border-radius:18px 18px 12px 12px;
+  transform:translateX(-50%) translateY(28px) scale(.88);
+  background:linear-gradient(180deg,#ffd79a 0%,#eaa557 62%,#c7773c 100%);
+  box-shadow:inset 0 -8px 0 rgba(97,60,43,.12),0 14px 18px rgba(80,59,47,.12);
+  z-index:4;
+}
+.layer-bottom{bottom:72px;width:176px;height:62px}
+.layer-top{bottom:132px;width:138px;height:52px;z-index:6;background:linear-gradient(180deg,#ffdca8 0%,#e9a35b 62%,#c97343 100%)}
+.cake-cream{
+  left:50%;
+  transform:translateX(-50%) translateY(28px) scale(.88);
+  background:linear-gradient(180deg,#fffef8,#ffe7ca);
+  box-shadow:inset -4px -6px 0 rgba(201,150,79,.10),0 8px 12px rgba(80,59,47,.08);
+  z-index:5;
+}
+.cream-bottom{bottom:123px;width:184px;height:28px;border-radius:50%}
+.cream-top{bottom:178px;width:146px;height:34px;border-radius:50%;z-index:7}
+.cake-drip{
+  width:18px;
+  height:32px;
+  border-radius:0 0 999px 999px;
+  background:#fff0d8;
+  z-index:8;
+}
+.drip-a{left:94px;bottom:151px}.drip-b{left:128px;bottom:144px;height:42px}.drip-c{right:96px;bottom:150px;height:28px}
+.cake-topping{
+  border-radius:50%;
+  z-index:10;
+  box-shadow:0 5px 8px rgba(80,59,47,.14), inset -2px -3px 0 rgba(80,59,47,.10);
+}
+.topping-a{left:96px;bottom:203px;width:24px;height:24px;background:#d95e71}
+.topping-b{left:132px;bottom:215px;width:20px;height:20px;background:#f0b245}
+.topping-c{right:98px;bottom:202px;width:22px;height:22px;background:#6f8bb6}
+.cake-candle-small{
+  bottom:207px;
+  width:14px;
+  height:46px;
+  border-radius:8px;
+  background:repeating-linear-gradient(135deg,#fff8ed 0 7px,#d98695 7px 14px);
+  z-index:11;
+}
+.candle-a{left:118px}.candle-b{right:118px}
+.cake-candle-small span{
+  position:absolute;
+  left:50%;
+  top:-22px;
+  width:16px;
+  height:22px;
+  border-radius:50% 50% 50% 0;
+  background:linear-gradient(180deg,#fff6a8,#ff9b4a);
+  transform:translateX(-50%) rotate(-45deg);
+  filter:drop-shadow(0 0 9px rgba(255,174,73,.72));
+  animation:flameWiggle .65s ease-in-out infinite alternate;
+}
+.cake-sparkle{
+  font-size:1.45rem;
+  z-index:12;
+  color:#d98695;
+  filter:drop-shadow(0 5px 4px rgba(80,59,47,.12));
+}
+.sparkle-one{left:68px;bottom:222px}.sparkle-two{right:74px;bottom:220px}.sparkle-three{left:50%;bottom:250px;transform:translateX(-50%) translateY(28px) scale(.88);color:#c9964f}
+.cake-builder[data-step="1"] .layer-bottom,
+.cake-builder[data-step="2"] .layer-bottom,
+.cake-builder[data-step="3"] .layer-bottom,
+.cake-builder[data-step="4"] .layer-bottom,
+.cake-builder[data-step="5"] .layer-bottom,
+.cake-builder[data-step="6"] .layer-bottom,
+.cake-builder[data-step="2"] .cream-bottom,
+.cake-builder[data-step="3"] .cream-bottom,
+.cake-builder[data-step="4"] .cream-bottom,
+.cake-builder[data-step="5"] .cream-bottom,
+.cake-builder[data-step="6"] .cream-bottom,
+.cake-builder[data-step="3"] .layer-top,
+.cake-builder[data-step="4"] .layer-top,
+.cake-builder[data-step="5"] .layer-top,
+.cake-builder[data-step="6"] .layer-top,
+.cake-builder[data-step="4"] .cream-top,
+.cake-builder[data-step="5"] .cream-top,
+.cake-builder[data-step="6"] .cream-top,
+.cake-builder[data-step="5"] .cake-drip,
+.cake-builder[data-step="6"] .cake-drip,
+.cake-builder[data-step="5"] .cake-topping,
+.cake-builder[data-step="6"] .cake-topping,
+.cake-builder[data-step="6"] .cake-candle-small,
+.cake-builder.complete .cake-sparkle{
+  opacity:1;
+  transform:translateX(-50%) translateY(0) scale(1);
+}
+.cake-builder[data-step="2"] .cream-bottom,
+.cake-builder[data-step="3"] .cream-bottom,
+.cake-builder[data-step="4"] .cream-bottom,
+.cake-builder[data-step="5"] .cream-bottom,
+.cake-builder[data-step="6"] .cream-bottom,
+.cake-builder[data-step="4"] .cream-top,
+.cake-builder[data-step="5"] .cream-top,
+.cake-builder[data-step="6"] .cream-top{
+  transform:translateX(-50%) translateY(0) scale(1);
+}
+.cake-builder[data-step="5"] .cake-drip,
+.cake-builder[data-step="6"] .cake-drip,
+.cake-builder[data-step="5"] .cake-topping,
+.cake-builder[data-step="6"] .cake-topping,
+.cake-builder[data-step="6"] .cake-candle-small{
+  transform:translateY(0) scale(1);
+}
+.cake-builder.complete{animation:cakeHappy .75s ease both}
+@keyframes cakeHappy{0%,100%{transform:translateY(0)}35%{transform:translateY(-8px)}70%{transform:translateY(2px)}}
+.cake-falling-ingredient{
+  position:absolute;
+  top:18px;
+  z-index:20;
+  font-size:1.55rem;
+  filter:drop-shadow(0 4px 4px rgba(80,59,47,.13));
+  animation:cakeIngredientDrop .9s cubic-bezier(.2,1.25,.3,1) both;
+}
+@keyframes cakeIngredientDrop{
+  0%{transform:translateY(-80px) translateX(var(--fall-x)) rotate(-36deg);opacity:0}
+  40%{opacity:1}
+  100%{transform:translateY(196px) translateX(0) rotate(12deg);opacity:0}
+}
+body.night .cake-builder{
+  background:linear-gradient(180deg,#fff8ed 0%,#ead1af 58%,#c89461 100%);
+}
+@media(max-width:900px){
+  .cake-recipe-layout{grid-template-columns:1fr!important;gap:16px!important}
+  .cake-builder{height:300px!important}
+}
+@media(max-width:560px){
+  .cake-builder{height:270px!important;border-radius:22px!important}
+  .cake-stand{width:210px;bottom:30px}.cake-plate-small{bottom:48px}
+  .layer-bottom{bottom:64px;width:160px;height:56px}.cream-bottom{bottom:112px;width:168px}
+  .layer-top{bottom:120px;width:126px;height:48px}.cream-top{bottom:162px;width:134px}
+  .drip-a{left:88px;bottom:137px}.drip-b{left:120px;bottom:130px}.drip-c{right:88px;bottom:137px}
+  .topping-a{left:88px;bottom:185px}.topping-b{left:122px;bottom:195px}.topping-c{right:88px;bottom:185px}
+  .cake-candle-small{bottom:188px}.candle-a{left:112px}.candle-b{right:112px}
+  .sparkle-one{left:58px;bottom:202px}.sparkle-two{right:62px;bottom:202px}.sparkle-three{bottom:228px}
+}

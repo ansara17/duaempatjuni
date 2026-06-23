@@ -325,32 +325,51 @@
       <p class="eyebrow">little survival kit</p>
       <h2 class="modal-title">${escapeHtml(kit.title)}</h2>
       <p class="modal-subtitle">${escapeHtml(kit.subtitle)}<br><strong>${escapeHtml(kit.note)}</strong></p>
-      <div class="kit-layout animated-kit-layout">
-        <section class="kit-visual animated-kit-visual">
-          <div class="kit-mood-scene" id="kitMoodScene">
+      <div class="kit-layout animated-kit-layout survival-v35-layout">
+        <section class="kit-visual animated-kit-visual survival-v35-visual">
+          <div class="kit-mood-scene survival-v35-scene" id="kitMoodScene">
             <div class="mood-sun"></div>
             <div class="mood-cloud cloud-a"></div>
             <div class="mood-cloud cloud-b"></div>
-            <div class="girl-character mood-0" id="kitCharacter" aria-hidden="true">
-              <div class="hair hair-back"></div>
-              <div class="hair hair-left"></div>
-              <div class="hair hair-right"></div>
-              <div class="face">
-                <span class="bang bang-a"></span>
-                <span class="bang bang-b"></span>
-                <span class="brow brow-left"></span>
-                <span class="brow brow-right"></span>
-                <span class="eye eye-left"></span>
-                <span class="eye eye-right"></span>
-                <span class="blush blush-left"></span>
-                <span class="blush blush-right"></span>
-                <span class="mouth"></span>
-              </div>
-              <div class="dress"></div>
-              <div class="hand hand-left"></div>
-              <div class="hand hand-right"></div>
-              <div class="little-heart">♡</div>
-            </div>
+            <svg class="character-svg mood-0" id="kitCharacter" viewBox="0 0 260 300" role="img" aria-label="Ilustrasi perempuan kecil yang mood-nya membaik">
+              <defs>
+                <linearGradient id="skinGrad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#ffdfcf" />
+                  <stop offset="1" stop-color="#f0b89f" />
+                </linearGradient>
+                <linearGradient id="dressGrad" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" stop-color="#fff0dc" />
+                  <stop offset="1" stop-color="#d98695" />
+                </linearGradient>
+                <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+                  <feDropShadow dx="0" dy="12" stdDeviation="8" flood-color="#503b2f" flood-opacity=".18" />
+                </filter>
+              </defs>
+              <ellipse class="char-shadow" cx="130" cy="276" rx="62" ry="13" fill="rgba(80,59,47,.14)" />
+              <g class="char-body" filter="url(#softShadow)">
+                <path class="char-dress" d="M76 244c4-50 31-75 54-75s50 25 54 75c1 12-8 22-21 22H97c-13 0-22-10-21-22Z" fill="url(#dressGrad)" />
+                <path class="char-arm arm-left" d="M88 207c-22 12-29 25-22 34 6 8 20 2 35-14" fill="none" stroke="#f0b89f" stroke-width="15" stroke-linecap="round" />
+                <path class="char-arm arm-right" d="M172 207c22 12 29 25 22 34-6 8-20 2-35-14" fill="none" stroke="#f0b89f" stroke-width="15" stroke-linecap="round" />
+                <path class="char-hair-back" d="M78 130c0-44 24-73 52-73s52 29 52 73c0 36-15 73-52 73s-52-37-52-73Z" fill="#161213" />
+                <path class="char-hair-side left" d="M79 126c-16 20-16 63-3 91 20-18 28-51 24-86Z" fill="#211819" />
+                <path class="char-hair-side right" d="M181 126c16 20 16 63 3 91-20-18-28-51-24-86Z" fill="#211819" />
+                <ellipse class="char-face" cx="130" cy="134" rx="47" ry="52" fill="url(#skinGrad)" />
+                <path class="char-bang" d="M91 106c23-42 74-42 85-1-24-12-48-9-85 1Z" fill="#0e0c0d" />
+                <path class="char-cap" d="M82 89c19-26 76-37 105-5-17 13-74 22-105 5Z" fill="#d98695" />
+                <path class="char-cap-top" d="M111 66c18-13 45-10 58 7-18 9-39 12-58-7Z" fill="#b86478" opacity=".95" />
+                <path class="char-brow brow-left" d="M103 130q8-7 17 0" fill="none" stroke="#6e463f" stroke-width="4" stroke-linecap="round" />
+                <path class="char-brow brow-right" d="M140 130q9-7 18 0" fill="none" stroke="#6e463f" stroke-width="4" stroke-linecap="round" />
+                <ellipse class="char-eye eye-left" cx="112" cy="143" rx="5" ry="7" fill="#4e332f" />
+                <ellipse class="char-eye eye-right" cx="148" cy="143" rx="5" ry="7" fill="#4e332f" />
+                <ellipse class="char-blush blush-left" cx="104" cy="160" rx="10" ry="5" fill="#d98695" opacity=".22" />
+                <ellipse class="char-blush blush-right" cx="156" cy="160" rx="10" ry="5" fill="#d98695" opacity=".22" />
+                <path class="mouth mouth-sad" d="M114 174q16-14 32 0" fill="none" stroke="#6e463f" stroke-width="5" stroke-linecap="round" />
+                <path class="mouth mouth-flat" d="M116 171q14 2 28 0" fill="none" stroke="#6e463f" stroke-width="5" stroke-linecap="round" />
+                <path class="mouth mouth-soft" d="M116 169q14 12 28 0" fill="none" stroke="#6e463f" stroke-width="5" stroke-linecap="round" />
+                <path class="mouth mouth-happy" d="M111 166q19 20 38 0" fill="none" stroke="#6e463f" stroke-width="5" stroke-linecap="round" />
+                <text class="char-heart" x="130" y="224" text-anchor="middle">♡</text>
+              </g>
+            </svg>
             <div class="mood-meter" aria-hidden="true"><span id="moodFill"></span></div>
             <p class="mood-text" id="moodText">Mood: ${escapeHtml(kit.moodLabels?.[0] || 'masih mendung')}</p>
           </div>
@@ -385,12 +404,12 @@
     const fill = $('#moodFill');
     const text = $('#moodText');
     const moodIndex = Math.min(5, Math.ceil((count / total) * 5));
-    character.className = `girl-character mood-${moodIndex}`;
-    fill.style.width = `${Math.round((count / total) * 100)}%`;
-    text.textContent = `Mood: ${kit.moodLabels?.[moodIndex] || (count === total ? 'bahagia' : 'membaik')}`;
+    if (character) character.setAttribute('class', `character-svg mood-${moodIndex}`);
+    if (fill) fill.style.width = `${Math.round((count / total) * 100)}%`;
+    if (text) text.textContent = `Mood: ${kit.moodLabels?.[moodIndex] || (count === total ? 'bahagia' : 'membaik')}`;
 
     if (count === total) {
-      scene.classList.add('complete');
+      scene?.classList.add('complete');
       $('#kitMessage').innerHTML = `<strong>Semua item sudah dipakai.</strong><br>${escapeHtml(kit.complete || 'Semoga hari-harimu terasa lebih ringan.')}`;
     }
   }
@@ -488,7 +507,7 @@
 
   function renderRecipeCard() {
     const recipe = CONFIG.recipeCard;
-    const icons = ['✨', '🌿', '🍓', '☁️', '🫶', '🌙'];
+    const icons = ['🍰', '🍓', '☁️', '✨', '🫶', '🌙'];
     const ingredientButtons = recipe.ingredients.map((ingredient, index) => `
       <button class="ingredient-chip" data-ingredient="${index}" type="button">
         <span>${icons[index % icons.length]}</span>
@@ -500,44 +519,34 @@
     openModal(`
       <p class="eyebrow">recipe card</p>
       <h2 class="modal-title">${escapeHtml(recipe.title)}</h2>
-      <p class="modal-subtitle">${escapeHtml(recipe.subtitle)}<br><strong>Klik bahan-bahannya. Mangkuk kosongnya akan pelan-pelan berubah jadi makanan manis.</strong></p>
-      <div class="recipe-layout animated-recipe-layout">
+      <p class="modal-subtitle">${escapeHtml(recipe.subtitle)}<br><strong>Klik bahan-bahannya. Kue tart kecilnya akan tersusun pelan-pelan.</strong></p>
+      <div class="recipe-layout animated-recipe-layout cake-recipe-layout">
         <section class="recipe-card-main interactive-recipe-card">
           <span class="recipe-tape"></span>
           <h3>${escapeHtml(recipe.ingredientsTitle)}</h3>
           <div class="ingredient-list">${ingredientButtons}</div>
         </section>
-        <section class="recipe-mixing-area">
-          <div class="mixing-bowl food-bowl" id="mixingBowl" aria-label="Mangkuk resep ulang tahun">
-            <div class="bowl-back-glow"></div>
-            <div class="bowl-fill" id="bowlFill"></div>
-            <div class="food-surface" id="foodSurface">
-              <span class="mix-dot dot-a"></span>
-              <span class="mix-dot dot-b"></span>
-              <span class="mix-dot dot-c"></span>
-            </div>
-            <div class="final-food" id="finalFood" aria-hidden="true">
-              <span class="dessert-base"></span>
-              <span class="cream-swirl swirl-a"></span>
-              <span class="cream-swirl swirl-b"></span>
-              <span class="cream-swirl swirl-c"></span>
-              <span class="fruit fruit-a"></span>
-              <span class="fruit fruit-b"></span>
-              <span class="fruit fruit-c"></span>
-              <span class="sprinkle sprinkle-a"></span>
-              <span class="sprinkle sprinkle-b"></span>
-              <span class="sprinkle sprinkle-c"></span>
-              <span class="sweet-sparkle sparkle-a">✦</span>
-              <span class="sweet-sparkle sparkle-b">♡</span>
-            </div>
-            <div class="bowl-rim"></div>
-            <div class="bowl-body"></div>
-            <div class="bowl-spoon"></div>
-            <div class="steam steam-one">♡</div>
-            <div class="steam steam-two">✦</div>
-            <div class="steam steam-three">♡</div>
+        <section class="cake-building-area">
+          <div class="cake-builder" id="cakeBuilder" aria-label="Animasi merangkai kue tart ulang tahun">
+            <div class="cake-sparkle sparkle-one">✦</div>
+            <div class="cake-sparkle sparkle-two">♡</div>
+            <div class="cake-sparkle sparkle-three">✧</div>
+            <div class="cake-stand"></div>
+            <div class="cake-layer layer-bottom"></div>
+            <div class="cake-cream cream-bottom"></div>
+            <div class="cake-layer layer-top"></div>
+            <div class="cake-cream cream-top"></div>
+            <div class="cake-drip drip-a"></div>
+            <div class="cake-drip drip-b"></div>
+            <div class="cake-drip drip-c"></div>
+            <div class="cake-topping topping-a"></div>
+            <div class="cake-topping topping-b"></div>
+            <div class="cake-topping topping-c"></div>
+            <div class="cake-candle-small candle-a"><span></span></div>
+            <div class="cake-candle-small candle-b"><span></span></div>
+            <div class="cake-plate-small"></div>
           </div>
-          <div class="recipe-message" id="recipeMessage">Mangkuknya masih kosong. Masukkan bahan satu per satu.</div>
+          <div class="recipe-message" id="recipeMessage">Kuenya belum dirangkai. Pilih bahan satu per satu.</div>
           <section class="recipe-card-steps hidden" id="recipeStepsBox">
             <h3>${escapeHtml(recipe.stepsTitle)}</h3>
             <ol class="recipe-steps">${steps}</ol>
@@ -557,42 +566,41 @@
         if (mixed.has(index)) return;
         mixed.add(index);
         button.classList.add('used');
-        addIngredientToBowl(button, index);
-        updateRecipeBowl(mixed.size, total);
+        addIngredientToCake(index);
+        updateRecipeCake(mixed.size, total);
 
         if (mixed.size === total) {
-          $('#mixingBowl').classList.add('complete');
+          $('#cakeBuilder').classList.add('complete');
           $('#recipeStepsBox').classList.remove('hidden');
           $('#recipeMessage').textContent = recipe.closing;
           confetti(42);
         } else {
-          $('#recipeMessage').textContent = `${mixed.size}/${total} bahan sudah masuk. Mangkuknya mulai terisi.`;
+          $('#recipeMessage').textContent = `${mixed.size}/${total} bahan sudah dipakai. Kue tartnya mulai terbentuk.`;
           confetti(8);
         }
       });
     });
   }
 
-  function updateRecipeBowl(count, total) {
-    const fill = $('#bowlFill');
-    const surface = $('#foodSurface');
-    const ratio = count / total;
-    fill.style.setProperty('--recipe-fill', ratio.toFixed(2));
-    fill.style.height = `${Math.round(14 + ratio * 72)}px`;
-    surface.style.opacity = Math.min(1, ratio + .10);
-    surface.style.transform = `translateX(-50%) translateY(${28 - ratio * 34}px) scale(${.76 + ratio * .24})`;
+  function updateRecipeCake(count, total) {
+    const cake = $('#cakeBuilder');
+    if (!cake) return;
+    cake.dataset.step = String(count);
+    cake.style.setProperty('--cake-progress', (count / total).toFixed(2));
   }
 
-  function addIngredientToBowl(button, index) {
-    const bowl = $('#mixingBowl');
-    const symbols = ['✨', '🌿', '🍓', '☁️', '🫶', '🌙'];
+  function addIngredientToCake(index) {
+    const cake = $('#cakeBuilder');
+    if (!cake) return;
+    const symbols = ['🍰', '🍓', '☁️', '✨', '🫶', '🌙'];
     const chip = document.createElement('span');
-    chip.className = 'bowl-chip';
+    chip.className = 'cake-falling-ingredient';
     chip.textContent = symbols[index % symbols.length];
-    chip.style.left = `${24 + (index % 5) * 12}%`;
-    chip.style.setProperty('--settle-x', `${-18 + (index % 5) * 9}px`);
+    chip.style.left = `${18 + (index % 6) * 12}%`;
+    chip.style.setProperty('--fall-x', `${-26 + (index % 6) * 10}px`);
     chip.style.animationDelay = `${index * 20}ms`;
-    bowl.appendChild(chip);
+    cake.appendChild(chip);
+    window.setTimeout(() => chip.remove(), 1100);
   }
 
   function openGift() {

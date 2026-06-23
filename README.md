@@ -77,8 +77,8 @@ Kalau tidak ada, scrapbook tetap berjalan normal.
 5. Pilih Branch: main dan folder: / root.
 6. Simpan, lalu tunggu link GitHub Pages aktif.
 
-## Catatan V3.4
 
-- Ilustrasi Survival Kit diganti menjadi karakter perempuan berambut panjang hitam.
-- Tampilan Survival Kit di mobile diperbaiki agar karakter tetap muncul.
-- Recipe Card diperbaiki: mangkuk kosong terisi bertahap dan berubah menjadi dessert yang lebih jelas/appetizing.
+## Catatan V3.5
+- Ilustrasi Survival Kit diganti menjadi karakter perempuan bertopi dengan rambut lebih sederhana agar lebih stabil di mobile.
+- Recipe Card tidak lagi memakai mangkuk; sekarang bahan-bahan merangkai kue tart secara bertahap.
+- Area Survival Kit dipaksa tampil dalam flow mobile agar tidak terpotong di layar kecil.

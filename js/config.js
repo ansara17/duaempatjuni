@@ -29,7 +29,7 @@ window.SCRAPBOOK_CONFIG = {
     letter: "read",
     kit: "equipped",
     seed: "planted",
-    recipe: "mixed"
+    recipe: "baked"
   },
 
   memories: [
