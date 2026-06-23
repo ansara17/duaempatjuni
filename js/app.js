@@ -331,11 +331,13 @@
             <div class="mood-sun"></div>
             <div class="mood-cloud cloud-a"></div>
             <div class="mood-cloud cloud-b"></div>
-            <div class="pashmina-character mood-0" id="kitCharacter" aria-hidden="true">
-              <div class="pashmina-back"></div>
-              <div class="pashmina-tail"></div>
-              <div class="pashmina-front"></div>
+            <div class="girl-character mood-0" id="kitCharacter" aria-hidden="true">
+              <div class="hair hair-back"></div>
+              <div class="hair hair-left"></div>
+              <div class="hair hair-right"></div>
               <div class="face">
+                <span class="bang bang-a"></span>
+                <span class="bang bang-b"></span>
                 <span class="brow brow-left"></span>
                 <span class="brow brow-right"></span>
                 <span class="eye eye-left"></span>
@@ -347,6 +349,7 @@
               <div class="dress"></div>
               <div class="hand hand-left"></div>
               <div class="hand hand-right"></div>
+              <div class="little-heart">♡</div>
             </div>
             <div class="mood-meter" aria-hidden="true"><span id="moodFill"></span></div>
             <p class="mood-text" id="moodText">Mood: ${escapeHtml(kit.moodLabels?.[0] || 'masih mendung')}</p>
@@ -382,7 +385,7 @@
     const fill = $('#moodFill');
     const text = $('#moodText');
     const moodIndex = Math.min(5, Math.ceil((count / total) * 5));
-    character.className = `pashmina-character mood-${moodIndex}`;
+    character.className = `girl-character mood-${moodIndex}`;
     fill.style.width = `${Math.round((count / total) * 100)}%`;
     text.textContent = `Mood: ${kit.moodLabels?.[moodIndex] || (count === total ? 'bahagia' : 'membaik')}`;
 
@@ -508,16 +511,24 @@
           <div class="mixing-bowl food-bowl" id="mixingBowl" aria-label="Mangkuk resep ulang tahun">
             <div class="bowl-back-glow"></div>
             <div class="bowl-fill" id="bowlFill"></div>
-            <div class="food-surface" id="foodSurface"></div>
+            <div class="food-surface" id="foodSurface">
+              <span class="mix-dot dot-a"></span>
+              <span class="mix-dot dot-b"></span>
+              <span class="mix-dot dot-c"></span>
+            </div>
             <div class="final-food" id="finalFood" aria-hidden="true">
-              <span class="cream cream-a"></span>
-              <span class="cream cream-b"></span>
-              <span class="cream cream-c"></span>
-              <span class="topping berry-a">🍓</span>
-              <span class="topping berry-b">🫐</span>
-              <span class="topping cookie-a">🍪</span>
-              <span class="topping sparkle-a">✦</span>
-              <span class="topping sparkle-b">♡</span>
+              <span class="dessert-base"></span>
+              <span class="cream-swirl swirl-a"></span>
+              <span class="cream-swirl swirl-b"></span>
+              <span class="cream-swirl swirl-c"></span>
+              <span class="fruit fruit-a"></span>
+              <span class="fruit fruit-b"></span>
+              <span class="fruit fruit-c"></span>
+              <span class="sprinkle sprinkle-a"></span>
+              <span class="sprinkle sprinkle-b"></span>
+              <span class="sprinkle sprinkle-c"></span>
+              <span class="sweet-sparkle sparkle-a">✦</span>
+              <span class="sweet-sparkle sparkle-b">♡</span>
             </div>
             <div class="bowl-rim"></div>
             <div class="bowl-body"></div>
@@ -566,10 +577,10 @@
     const fill = $('#bowlFill');
     const surface = $('#foodSurface');
     const ratio = count / total;
-    const height = Math.round(8 + ratio * 78);
-    fill.style.height = `${height}%`;
-    surface.style.opacity = Math.min(1, ratio + .15);
-    surface.style.transform = `translateX(-50%) translateY(${34 - ratio * 34}px) scale(${.72 + ratio * .28})`;
+    fill.style.setProperty('--recipe-fill', ratio.toFixed(2));
+    fill.style.height = `${Math.round(14 + ratio * 72)}px`;
+    surface.style.opacity = Math.min(1, ratio + .10);
+    surface.style.transform = `translateX(-50%) translateY(${28 - ratio * 34}px) scale(${.76 + ratio * .24})`;
   }
 
   function addIngredientToBowl(button, index) {
