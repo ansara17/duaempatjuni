@@ -414,7 +414,14 @@ body.night .recipe-clip{color:#fff8ed!important}
     linear-gradient(90deg, rgba(255,255,255,.12), transparent 22%, rgba(70,35,16,.11) 58%, transparent 100%),
     radial-gradient(circle at 14% 18%, rgba(255,251,232,.35), transparent 26%);
 }
-.desk-board > *:not(.desk-bg){position:relative;z-index:2}
+/* FIX V3.1: jangan override posisi absolute benda di desktop */
+.desk-board .desk-item,
+.desk-board .secret-heart{
+  z-index:2;
+}
+.desk-board .desk-item:hover{
+  z-index:6;
+}
 body.night .desk-board{
   background:
     radial-gradient(ellipse at 12% 18%, rgba(244,191,124,.12), transparent 25%),
