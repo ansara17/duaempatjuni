@@ -50,7 +50,9 @@ window.SCRAPBOOK_CONFIG = {
   survivalKit: {
     title: "Little Survival Kit",
     subtitle: "Bekal kecil untuk hari-hari yang ringan maupun hari-hari yang terasa berat.",
-    note: "Klik satu item untuk membuka pesan kecilnya.",
+    note: "Klik semua itemnya dan lihat ekspresinya berubah pelan-pelan.",
+    complete: "Semua bekal kecil sudah dibuka. Semoga hari-hari beratmu terasa sedikit lebih ringan, dan semoga kamu selalu ingat bahwa kamu tidak harus kuat sendirian terus.",
+    moodLabels: ["masih mendung", "sedikit lega", "mulai tenang", "hampir tersenyum", "lebih hangat", "bahagia"],
     items: [
       {
         icon: "🩹",
@@ -88,7 +90,8 @@ window.SCRAPBOOK_CONFIG = {
   seedPacket: {
     title: "Benih untuk Umur Barumu",
     subtitle: "Tanam satu harapan, rawat pelan-pelan, dan biarkan hal baik tumbuh dengan waktunya sendiri.",
-    instruction: "Klik benihnya satu per satu.",
+    instruction: "Klik benihnya satu per satu dan lihat taman kecilnya tumbuh.",
+    complete: "Tamannya sudah tumbuh. Semoga umur barumu juga tumbuh pelan-pelan menjadi tempat yang lebih indah untuk kamu tinggal.",
     seeds: [
       {
         title: "Tenang",
@@ -136,14 +139,16 @@ window.SCRAPBOOK_CONFIG = {
       "Jangan lupa beri ruang untuk gagal, belajar, dan tumbuh.",
       "Sajikan hangat bersama hal-hal kecil yang membuatmu bahagia."
     ],
-    closing: "Semoga resep ini menemani umur barumu dengan cara yang sederhana, hangat, dan baik."
+    closing: "Semoga resep ini menemani umur barumu dengan cara yang sederhana, hangat, dan baik.",
+    complete: "Resepnya sudah selesai. Tidak perlu sempurna; semoga umur barumu cukup hangat, cukup tenang, dan penuh hal baik yang diracik pelan-pelan."
   },
 
   finalGift: {
     lockedTitle: "Hadiah ini belum bisa dibuka",
     lockedMessage: "Buka semua benda di meja dulu. Setelah stempelnya lengkap, kotak hadiah ini akan menyala.",
     title: "Satu hadiah kecil terakhir",
-    beforeBlow: "Ada lilin kecil yang menunggu ditiup.",
+    beforeBlow: "Buka pitanya dulu, lalu tiup lilin kecil yang muncul dari dalam kotak.",
+    openButton: "Buka pitanya 🎀",
     blowButton: "Tiup lilin ✨",
     afterBlowTitle: "Selamat ulang tahun, Akmelia Zahra",
     message: "Semoga umur barumu membawa lebih banyak tenang, lebih banyak bahagia, dan lebih banyak alasan untuk percaya bahwa hidup masih menyimpan banyak hal baik untukmu.\n\nTerima kasih sudah tetap menjadi kamu. Hari ini, semoga kamu merasa dirayakan dengan cara yang paling hangat."

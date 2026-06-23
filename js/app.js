@@ -6,7 +6,6 @@
   const state = {
     started: false,
     opened: new Set(),
-    currentTrack: 0,
     secretsFound: new Set(),
     letterTimer: null
   };
@@ -25,7 +24,6 @@
     modalContent: $('#modalContent'),
     themeBtn: $('#themeBtn'),
     helpBtn: $('#helpBtn'),
-    musicPlayer: $('#musicPlayer'),
     clickSound: $('#clickSound'),
     lightbox: $('#lightbox'),
     lightboxImg: $('#lightboxImg'),
@@ -111,17 +109,6 @@
     els.lightbox.addEventListener('click', (event) => {
       if (event.target === els.lightbox) closeLightbox();
     });
-
-    els.musicPlayer.addEventListener('timeupdate', updateMusicProgress);
-    els.musicPlayer.addEventListener('play', updateCassetteMotion);
-    els.musicPlayer.addEventListener('pause', updateCassetteMotion);
-    els.musicPlayer.addEventListener('ended', updateCassetteMotion);
-    els.musicPlayer.addEventListener('error', () => {
-      const status = $('#musicStatus');
-      if (status) {
-        status.textContent = 'File lagu belum ditemukan. Masukkan file mp3 ke folder assets/music lalu samakan namanya di js/config.js.';
-      }
-    });
   }
 
   function openItem(item) {
@@ -149,9 +136,7 @@
       const button = $(`[data-item="${item}"]`);
       if (button) button.classList.add('is-opened');
       updateProgress();
-      if (state.opened.size === CONFIG.requiredToUnlockGift) {
-        unlockGift();
-      }
+      if (state.opened.size === CONFIG.requiredToUnlockGift) unlockGift();
     }
   }
 
@@ -200,7 +185,7 @@
   function renderPolaroid() {
     const cards = CONFIG.memories.map((memory, index) => `
       <figure class="polaroid-card" style="--r:${[-3, 2, -1, 4, -4][index % 5]}deg">
-        <img src="${memory.src}" alt="Kenangan ${index + 1}" data-lightbox-src="${memory.src}" />
+        <img src="${escapeAttribute(memory.src)}" alt="Kenangan ${index + 1}" data-lightbox-src="${escapeAttribute(memory.src)}" />
         <p>${escapeHtml(memory.caption)}</p>
       </figure>
     `).join('');
@@ -222,7 +207,7 @@
       <p class="eyebrow">folded birthday letter</p>
       <h2 class="modal-title">Surat kecil untuk ${escapeHtml(CONFIG.recipient)}</h2>
       <p class="modal-subtitle">Kertas ini terbuka pelan-pelan, seperti ucapan yang sengaja disimpan sebentar sebelum dibaca.</p>
-      <div class="letter-sheet" id="letterSheet"></div>
+      <div class="letter-sheet letter-sheet-open" id="letterSheet"></div>
       <div class="wish-controls">
         <button class="mini-btn" id="skipLetterBtn">Tampilkan semua</button>
       </div>
@@ -253,30 +238,66 @@
       <p class="eyebrow">little survival kit</p>
       <h2 class="modal-title">${escapeHtml(kit.title)}</h2>
       <p class="modal-subtitle">${escapeHtml(kit.subtitle)}<br><strong>${escapeHtml(kit.note)}</strong></p>
-      <div class="kit-layout">
-        <section class="kit-visual" aria-hidden="true">
-          <div class="kit-box">
-            <span class="kit-cross">✚</span>
-            <span class="kit-label">for heavy days</span>
+      <div class="kit-layout animated-kit-layout">
+        <section class="kit-visual animated-kit-visual">
+          <div class="kit-mood-scene" id="kitMoodScene">
+            <div class="mood-sun"></div>
+            <div class="mood-cloud cloud-a"></div>
+            <div class="mood-cloud cloud-b"></div>
+            <div class="hijab-character mood-0" id="kitCharacter" aria-hidden="true">
+              <div class="hijab-back"></div>
+              <div class="hijab-tail"></div>
+              <div class="face">
+                <span class="eye eye-left"></span>
+                <span class="eye eye-right"></span>
+                <span class="blush blush-left"></span>
+                <span class="blush blush-right"></span>
+                <span class="mouth"></span>
+              </div>
+              <div class="shoulders"></div>
+            </div>
+            <div class="mood-meter" aria-hidden="true"><span id="moodFill"></span></div>
+            <p class="mood-text" id="moodText">Mood: ${escapeHtml(kit.moodLabels?.[0] || 'masih mendung')}</p>
           </div>
         </section>
         <section>
           <div class="kit-grid">${items}</div>
-          <div class="kit-message" id="kitMessage">Pilih salah satu item kecil di atas.</div>
+          <div class="kit-message" id="kitMessage">Pilih satu item kecil di atas. Setiap item akan membuat murungnya berkurang sedikit.</div>
         </section>
       </div>
     `);
 
+    const usedItems = new Set();
+    const total = kit.items.length;
+
     $$('[data-kit-item]', els.modalContent).forEach((button) => {
       button.addEventListener('click', () => {
         tap();
-        const item = kit.items[Number(button.dataset.kitItem)];
-        $$('.kit-card', els.modalContent).forEach((card) => card.classList.remove('active'));
-        button.classList.add('active');
+        const index = Number(button.dataset.kitItem);
+        const item = kit.items[index];
+        usedItems.add(index);
+        button.classList.add('active', 'used');
         $('#kitMessage').innerHTML = `<strong>${escapeHtml(item.icon)} ${escapeHtml(item.title)}</strong><br>${escapeHtml(item.text)}`;
-        confetti(8);
+        updateKitMood(usedItems.size, total, kit);
+        confetti(usedItems.size === total ? 36 : 8);
       });
     });
+  }
+
+  function updateKitMood(count, total, kit) {
+    const character = $('#kitCharacter');
+    const scene = $('#kitMoodScene');
+    const fill = $('#moodFill');
+    const text = $('#moodText');
+    const moodIndex = Math.min(5, Math.ceil((count / total) * 5));
+    character.className = `hijab-character mood-${moodIndex}`;
+    fill.style.width = `${Math.round((count / total) * 100)}%`;
+    text.textContent = `Mood: ${kit.moodLabels?.[moodIndex] || (count === total ? 'bahagia' : 'membaik')}`;
+
+    if (count === total) {
+      scene.classList.add('complete');
+      $('#kitMessage').innerHTML = `<strong>Semua item sudah dipakai.</strong><br>${escapeHtml(kit.complete || 'Semoga hari-harimu terasa lebih ringan.')}`;
+    }
   }
 
   function renderSeedPacket() {
@@ -292,11 +313,16 @@
       <p class="eyebrow">seed packet</p>
       <h2 class="modal-title">${escapeHtml(packet.title)}</h2>
       <p class="modal-subtitle">${escapeHtml(packet.subtitle)}<br><strong>${escapeHtml(packet.instruction)}</strong></p>
-      <div class="seed-layout">
-        <section class="seed-envelope" aria-hidden="true">
-          <span class="seed-envelope-title">birthday seeds</span>
-          <span class="seed-envelope-line"></span>
-          <span class="seed-flower">✿</span>
+      <div class="seed-layout animated-seed-layout">
+        <section class="garden-scene" id="gardenScene" aria-label="Taman bunga kecil">
+          <div class="garden-sky">
+            <span class="garden-sun"></span>
+            <span class="garden-cloud one"></span>
+            <span class="garden-cloud two"></span>
+          </div>
+          <div class="garden-flowers" id="gardenFlowers"></div>
+          <div class="garden-soil"></div>
+          <div class="garden-complete-note" id="gardenCompleteNote">Tanam benihnya satu per satu.</div>
         </section>
         <section>
           <div class="seed-grid">${seeds}</div>
@@ -305,39 +331,139 @@
       </div>
     `);
 
+    const planted = new Set();
+    const positions = [
+      { left: 12, size: 1.00, color: 'rose' },
+      { left: 28, size: 1.18, color: 'gold' },
+      { left: 44, size: .92, color: 'sage' },
+      { left: 59, size: 1.24, color: 'blue' },
+      { left: 73, size: 1.04, color: 'rose' },
+      { left: 86, size: .96, color: 'gold' }
+    ];
+
     $$('[data-seed]', els.modalContent).forEach((button) => {
       button.addEventListener('click', () => {
         tap();
-        const seed = packet.seeds[Number(button.dataset.seed)];
+        const index = Number(button.dataset.seed);
+        const seed = packet.seeds[index];
+        if (planted.has(index)) {
+          $('#seedMessage').innerHTML = `<span class="grown-flower">✿</span><strong>Benih ${escapeHtml(seed.title)} sudah tumbuh.</strong><br>${escapeHtml(seed.text)}`;
+          return;
+        }
+
+        planted.add(index);
         button.classList.add('planted');
+        growFlower(index, positions[index % positions.length]);
         $('#seedMessage').innerHTML = `<span class="grown-flower">✿</span><strong>Benih ${escapeHtml(seed.title)} tumbuh.</strong><br>${escapeHtml(seed.text)}`;
-        confetti(12);
+        confetti(planted.size === packet.seeds.length ? 46 : 12);
+
+        if (planted.size === packet.seeds.length) {
+          $('#gardenScene').classList.add('complete');
+          $('#gardenCompleteNote').textContent = packet.complete || 'Tamannya sudah tumbuh.';
+          addButterflies();
+        }
       });
+    });
+  }
+
+  function growFlower(index, position) {
+    const flower = document.createElement('span');
+    flower.className = `garden-flower flower-${position.color}`;
+    flower.style.left = `${position.left}%`;
+    flower.style.setProperty('--flower-scale', position.size);
+    flower.style.animationDelay = `${index * 40}ms`;
+    flower.innerHTML = `
+      <i class="flower-stem"></i>
+      <b class="flower-head">✿</b>
+      <i class="flower-leaf leaf-a"></i>
+      <i class="flower-leaf leaf-b"></i>
+    `;
+    $('#gardenFlowers').appendChild(flower);
+  }
+
+  function addButterflies() {
+    const garden = $('#gardenScene');
+    ['🦋', '✦', '🦋'].forEach((symbol, index) => {
+      const butterfly = document.createElement('span');
+      butterfly.className = `butterfly butterfly-${index + 1}`;
+      butterfly.textContent = symbol;
+      garden.appendChild(butterfly);
     });
   }
 
   function renderRecipeCard() {
     const recipe = CONFIG.recipeCard;
-    const ingredients = recipe.ingredients.map((ingredient) => `<li>${escapeHtml(ingredient)}</li>`).join('');
+    const ingredientButtons = recipe.ingredients.map((ingredient, index) => `
+      <button class="ingredient-chip" data-ingredient="${index}" type="button">
+        <span>${['✨', '🌿', '😊', '☁️', '🫶', '🌙'][index % 6]}</span>
+        ${escapeHtml(ingredient)}
+      </button>
+    `).join('');
     const steps = recipe.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join('');
 
     openModal(`
       <p class="eyebrow">recipe card</p>
       <h2 class="modal-title">${escapeHtml(recipe.title)}</h2>
-      <p class="modal-subtitle">${escapeHtml(recipe.subtitle)}</p>
-      <div class="recipe-layout">
-        <section class="recipe-card-main">
+      <p class="modal-subtitle">${escapeHtml(recipe.subtitle)}<br><strong>Klik bahan-bahannya agar masuk ke mangkuk.</strong></p>
+      <div class="recipe-layout animated-recipe-layout">
+        <section class="recipe-card-main interactive-recipe-card">
           <span class="recipe-tape"></span>
           <h3>${escapeHtml(recipe.ingredientsTitle)}</h3>
-          <ul class="recipe-list">${ingredients}</ul>
+          <div class="ingredient-list">${ingredientButtons}</div>
         </section>
-        <section class="recipe-card-steps">
-          <h3>${escapeHtml(recipe.stepsTitle)}</h3>
-          <ol class="recipe-steps">${steps}</ol>
-          <div class="recipe-closing">${escapeHtml(recipe.closing)}</div>
+        <section class="recipe-mixing-area">
+          <div class="mixing-bowl" id="mixingBowl">
+            <div class="bowl-rim"></div>
+            <div class="bowl-body"></div>
+            <div class="bowl-fill" id="bowlFill"></div>
+            <div class="steam steam-one">♡</div>
+            <div class="steam steam-two">✦</div>
+            <div class="steam steam-three">♡</div>
+          </div>
+          <div class="recipe-message" id="recipeMessage">Mangkuknya masih kosong. Masukkan bahan satu per satu.</div>
+          <section class="recipe-card-steps hidden" id="recipeStepsBox">
+            <h3>${escapeHtml(recipe.stepsTitle)}</h3>
+            <ol class="recipe-steps">${steps}</ol>
+            <div class="recipe-closing">${escapeHtml(recipe.complete || recipe.closing)}</div>
+          </section>
         </section>
       </div>
     `);
+
+    const mixed = new Set();
+    const total = recipe.ingredients.length;
+
+    $$('[data-ingredient]', els.modalContent).forEach((button) => {
+      button.addEventListener('click', () => {
+        tap();
+        const index = Number(button.dataset.ingredient);
+        if (mixed.has(index)) return;
+        mixed.add(index);
+        button.classList.add('used');
+        addIngredientToBowl(button, index);
+        $('#recipeMessage').textContent = `${mixed.size}/${total} bahan sudah masuk ke mangkuk.`;
+        $('#bowlFill').style.height = `${Math.min(78, 12 + mixed.size * 11)}%`;
+
+        if (mixed.size === total) {
+          $('#mixingBowl').classList.add('complete');
+          $('#recipeStepsBox').classList.remove('hidden');
+          $('#recipeMessage').textContent = recipe.closing;
+          confetti(42);
+        } else {
+          confetti(8);
+        }
+      });
+    });
+  }
+
+  function addIngredientToBowl(button, index) {
+    const bowl = $('#mixingBowl');
+    const chip = document.createElement('span');
+    chip.className = 'bowl-chip';
+    chip.textContent = ['✨', '🌿', '😊', '☁️', '🫶', '🌙'][index % 6];
+    chip.style.left = `${26 + (index % 4) * 14}%`;
+    chip.style.animationDelay = `${index * 20}ms`;
+    bowl.appendChild(chip);
   }
 
   function openGift() {
@@ -352,28 +478,52 @@
     }
 
     openModal(`
-      <div class="gift-content">
+      <div class="gift-content animated-final-gift">
         <p class="eyebrow">final gift</p>
         <h2 class="modal-title">${escapeHtml(CONFIG.finalGift.title)}</h2>
         <p class="modal-subtitle">${escapeHtml(CONFIG.finalGift.beforeBlow)}</p>
-        <div class="cake" id="cake">
-          <div class="candle"><span class="flame"></span></div>
-          <div class="cake-body"></div>
+        <div class="final-gift-stage" id="finalGiftStage">
+          <div class="gift-box-anim" id="giftBoxAnim">
+            <div class="gift-glow"></div>
+            <div class="gift-lid"></div>
+            <div class="gift-box-body"></div>
+            <div class="gift-ribbon-anim vertical"></div>
+            <div class="gift-ribbon-anim horizontal"></div>
+          </div>
+          <div class="surprise-cake hidden" id="surpriseCake">
+            <div class="candle"><span class="flame"></span><span class="smoke">⌁</span></div>
+            <div class="cake-body"></div>
+            <div class="cake-plate"></div>
+          </div>
         </div>
-        <button class="primary-btn" id="blowCandleBtn">${escapeHtml(CONFIG.finalGift.blowButton)}</button>
+        <div class="gift-actions">
+          <button class="primary-btn" id="openGiftRibbonBtn">${escapeHtml(CONFIG.finalGift.openButton || 'Buka pitanya 🎀')}</button>
+          <button class="primary-btn hidden" id="blowCandleBtn">${escapeHtml(CONFIG.finalGift.blowButton)}</button>
+        </div>
         <div id="finalMessageBox"></div>
       </div>
     `);
 
+    $('#openGiftRibbonBtn').addEventListener('click', () => {
+      tap();
+      $('#giftBoxAnim').classList.add('open');
+      $('#openGiftRibbonBtn').classList.add('hidden');
+      window.setTimeout(() => {
+        $('#surpriseCake').classList.remove('hidden');
+        $('#blowCandleBtn').classList.remove('hidden');
+        confetti(28);
+      }, 650);
+    });
+
     $('#blowCandleBtn').addEventListener('click', () => {
       tap();
-      $('#cake').classList.add('blown');
+      $('#surpriseCake').classList.add('blown');
       $('#blowCandleBtn').classList.add('hidden');
       $('#finalMessageBox').innerHTML = `
-        <h2 class="modal-title">${escapeHtml(CONFIG.finalGift.afterBlowTitle)}</h2>
-        <p class="final-message">${escapeHtml(CONFIG.finalGift.message)}</p>
+        <h2 class="modal-title final-title-reveal">${escapeHtml(CONFIG.finalGift.afterBlowTitle)}</h2>
+        <p class="final-message final-message-reveal">${escapeHtml(CONFIG.finalGift.message)}</p>
       `;
-      confetti(60);
+      confetti(70);
     });
   }
 
@@ -385,7 +535,7 @@
         <li>Klik setiap benda di atas meja untuk membuka isi yang berbeda.</li>
         <li>Setiap benda yang dibuka akan memberi satu stempel.</li>
         <li>Kotak hadiah final baru terbuka setelah semua stempel terkumpul.</li>
-        <li>Untuk mengganti nama, teks, foto, dan isi scrapbook, edit file <strong>js/config.js</strong>.</li>
+        <li>Untuk mengganti nama, teks, foto, dan efek klik, edit file <strong>js/config.js</strong>.</li>
       </ul>
     `);
   }
@@ -465,10 +615,6 @@
     return `${path}${path.includes('?') ? '&' : '?'}v=${CACHE_BUSTER}`;
   }
 
-  function randomBetween(min, max) {
-    return min + Math.random() * (max - min);
-  }
-
   function escapeHtml(value) {
     return String(value)
       .replaceAll('&', '&amp;')
@@ -476,6 +622,10 @@
       .replaceAll('>', '&gt;')
       .replaceAll('"', '&quot;')
       .replaceAll("'", '&#039;');
+  }
+
+  function escapeAttribute(value) {
+    return escapeHtml(value).replaceAll('`', '&#096;');
   }
 
   init();

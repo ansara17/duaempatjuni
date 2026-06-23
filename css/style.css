@@ -377,3 +377,126 @@ body.night .recipe-clip{color:#fff8ed!important}
   .kit-grid,.seed-grid{grid-template-columns:1fr!important}
   .kit-visual{min-height:220px}.seed-envelope{min-height:240px}.recipe-card-main,.recipe-card-steps{padding:20px}
 }
+
+/* UPDATE V3: meja kayu lebih realistis + animasi interaktif */
+.desk-board{
+  border:1px solid rgba(91,54,25,.28) !important;
+  box-shadow:
+    0 28px 70px rgba(72,45,26,.28),
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 -24px 46px rgba(72,45,26,.12) !important;
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(255,244,214,.28), transparent 25%),
+    radial-gradient(ellipse at 82% 28%, rgba(88,46,19,.18), transparent 26%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 2px, transparent 2px 34px),
+    repeating-linear-gradient(0deg, transparent 0 58px, rgba(82,45,24,.16) 58px 61px, transparent 61px 124px),
+    linear-gradient(90deg, #b87943 0%, #d19a5d 14%, #b7743e 29%, #e2b276 45%, #c08349 63%, #efc084 82%, #b87843 100%) !important;
+  overflow:hidden;
+}
+.desk-board:before,
+.desk-board:after{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+.desk-board:before{
+  opacity:.32;
+  background:
+    radial-gradient(ellipse at 12% 40%, transparent 0 18px, rgba(86,44,19,.23) 19px 21px, transparent 22px 48px),
+    radial-gradient(ellipse at 76% 70%, transparent 0 12px, rgba(86,44,19,.19) 13px 15px, transparent 16px 36px),
+    repeating-radial-gradient(ellipse at 25% 30%, rgba(91,48,23,.18) 0 1px, transparent 1px 7px);
+  mix-blend-mode:multiply;
+}
+.desk-board:after{
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.12), transparent 22%, rgba(70,35,16,.11) 58%, transparent 100%),
+    radial-gradient(circle at 14% 18%, rgba(255,251,232,.35), transparent 26%);
+}
+.desk-board > *:not(.desk-bg){position:relative;z-index:2}
+body.night .desk-board{
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(244,191,124,.12), transparent 25%),
+    repeating-linear-gradient(0deg, transparent 0 58px, rgba(0,0,0,.24) 58px 61px, transparent 61px 124px),
+    linear-gradient(90deg, #3e2418 0%, #573522 18%, #321e16 35%, #624025 54%, #3d2619 76%, #5c3b24 100%) !important;
+  border-color:rgba(255,240,223,.12)!important;
+}
+
+/* V3 Survival Kit: karakter hijab pashmina berubah mood */
+.animated-kit-layout{grid-template-columns:minmax(260px,340px) 1fr;align-items:stretch}
+.animated-kit-visual{min-height:390px;display:block}
+.kit-mood-scene{
+  position:relative;
+  min-height:390px;
+  height:100%;
+  border-radius:26px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255,247,213,.95), transparent 18%),
+    linear-gradient(180deg,#d8ecf4 0%,#f7e7d7 60%,#e8c6a1 100%);
+  border:1px solid rgba(80,59,47,.13);
+  box-shadow:0 18px 36px rgba(80,59,47,.12);
+}
+body.night .kit-mood-scene{
+  background:
+    radial-gradient(circle at 20% 15%, rgba(238,194,122,.18), transparent 18%),
+    linear-gradient(180deg,#273045 0%,#4a3440 58%,#583c2c 100%);
+}
+.mood-sun{position:absolute;left:34px;top:30px;width:58px;height:58px;border-radius:50%;background:#f9c86f;box-shadow:0 0 40px rgba(249,200,111,.58);opacity:.35;transition:.5s ease}
+.kit-mood-scene.complete .mood-sun{opacity:1;transform:scale(1.12)}
+.mood-cloud{position:absolute;border-radius:999px;background:rgba(255,255,255,.82);filter:blur(.1px);transition:.7s ease}
+.mood-cloud:before,.mood-cloud:after{content:'';position:absolute;border-radius:50%;background:inherit}
+.mood-cloud:before{width:42px;height:42px;left:20px;top:-18px}.mood-cloud:after{width:34px;height:34px;right:18px;top:-13px}
+.cloud-a{left:150px;top:46px;width:105px;height:34px}.cloud-b{left:64px;top:116px;width:130px;height:36px;opacity:.75}
+.kit-mood-scene.complete .cloud-a{transform:translateX(120px);opacity:.16}.kit-mood-scene.complete .cloud-b{transform:translateX(-120px);opacity:.12}
+.hijab-character{position:absolute;left:50%;bottom:74px;width:172px;height:240px;transform:translateX(-50%);transition:.5s ease}
+.hijab-character .hijab-back{position:absolute;left:18px;right:18px;top:12px;height:178px;border-radius:82px 82px 72px 72px;background:linear-gradient(145deg,#c78c9b,#8e5b72);box-shadow:0 18px 32px rgba(80,59,47,.18)}
+.hijab-character .hijab-tail{position:absolute;right:14px;top:82px;width:58px;height:128px;border-radius:46px 16px 60px 18px;background:linear-gradient(160deg,#ac7186,#744d66);transform:rotate(-8deg);box-shadow:0 14px 24px rgba(80,59,47,.15)}
+.hijab-character .face{position:absolute;left:39px;top:54px;width:95px;height:102px;border-radius:44% 44% 48% 48%;background:linear-gradient(180deg,#ffd9c7,#f3bda8);box-shadow:inset 0 -6px 0 rgba(139,77,65,.06);z-index:2;transition:.4s ease}
+.hijab-character .face:before{content:'';position:absolute;inset:-16px -14px 54px -14px;border-radius:58px 58px 20px 20px;background:#9f687b;z-index:-1}
+.hijab-character .eye{position:absolute;top:42px;width:10px;height:13px;border-radius:50%;background:#5e3d36;transition:.35s ease}.eye-left{left:27px}.eye-right{right:27px}
+.hijab-character .blush{position:absolute;top:61px;width:18px;height:9px;border-radius:50%;background:rgba(217,134,149,.45);opacity:.2;transition:.4s ease}.blush-left{left:18px}.blush-right{right:18px}
+.hijab-character .mouth{position:absolute;left:50%;top:74px;width:34px;height:16px;transform:translateX(-50%);transition:.35s ease}
+.hijab-character .mouth:before{content:'';position:absolute;inset:0;border-top:4px solid #70483f;border-radius:50px 50px 0 0;transition:.35s ease}
+.hijab-character .shoulders{position:absolute;left:34px;right:34px;bottom:2px;height:72px;border-radius:42px 42px 18px 18px;background:linear-gradient(145deg,#fff1d9,#e8b0a8);z-index:0;box-shadow:0 12px 24px rgba(80,59,47,.13)}
+.hijab-character.mood-1{transform:translateX(-50%) translateY(-2px)}
+.hijab-character.mood-2{transform:translateX(-50%) translateY(-4px)}
+.hijab-character.mood-3{transform:translateX(-50%) translateY(-7px)}
+.hijab-character.mood-4{transform:translateX(-50%) translateY(-10px) rotate(-1deg)}
+.hijab-character.mood-5{transform:translateX(-50%) translateY(-14px) rotate(1deg)}
+.hijab-character.mood-2 .mouth:before{border-top:0;border-bottom:4px solid #70483f;border-radius:0;transform:translateY(6px) scaleX(.7)}
+.hijab-character.mood-3 .mouth:before{border-top:0;border-bottom:4px solid #70483f;border-radius:0 0 50px 50px;transform:translateY(2px)}
+.hijab-character.mood-4 .mouth:before,.hijab-character.mood-5 .mouth:before{border-top:0;border-bottom:5px solid #70483f;border-radius:0 0 50px 50px;transform:translateY(-2px)}
+.hijab-character.mood-4 .blush,.hijab-character.mood-5 .blush{opacity:.82}.hijab-character.mood-5 .eye{height:7px;border-radius:99px;transform:translateY(4px)}
+.mood-meter{position:absolute;left:28px;right:28px;bottom:46px;height:12px;border-radius:999px;background:rgba(80,59,47,.14);overflow:hidden}.mood-meter span{display:block;width:0;height:100%;border-radius:999px;background:linear-gradient(90deg,#d98695,#f4c978,#9aac8a);transition:.55s ease}
+.mood-text{position:absolute;left:20px;right:20px;bottom:14px;text-align:center;margin:0;font-weight:900;color:#6d4430}body.night .mood-text{color:#fff0df}
+.kit-card.used{background:rgba(154,172,138,.18);border-style:solid}.kit-card.used small{color:#8fa16f}.kit-card.used:after{content:'✓';margin-left:auto;font-weight:900;color:#8fa16f}
+
+/* V3 Seed Packet: taman bunga tumbuh */
+.animated-seed-layout{grid-template-columns:minmax(300px,420px) 1fr;align-items:stretch}
+.garden-scene{position:relative;min-height:390px;border-radius:28px;overflow:hidden;background:linear-gradient(180deg,#bfe6f2 0%,#f7e7cc 70%);border:1px solid rgba(80,59,47,.13);box-shadow:0 18px 36px rgba(80,59,47,.12)}
+body.night .garden-scene{background:linear-gradient(180deg,#273045 0%,#51415a 70%)}
+.garden-sky{position:absolute;inset:0 0 110px}.garden-sun{position:absolute;right:34px;top:28px;width:58px;height:58px;border-radius:50%;background:#f7c765;box-shadow:0 0 40px rgba(247,199,101,.55)}
+.garden-cloud{position:absolute;width:98px;height:30px;border-radius:999px;background:rgba(255,255,255,.82)}.garden-cloud:before,.garden-cloud:after{content:'';position:absolute;border-radius:50%;background:inherit}.garden-cloud:before{width:38px;height:38px;left:18px;top:-16px}.garden-cloud:after{width:30px;height:30px;right:16px;top:-12px}.garden-cloud.one{left:35px;top:58px}.garden-cloud.two{right:92px;top:112px;opacity:.72}
+.garden-soil{position:absolute;left:-4%;right:-4%;bottom:-20px;height:138px;border-radius:50% 50% 0 0;background:radial-gradient(ellipse at 18% 24%,rgba(255,255,255,.12),transparent 24%),linear-gradient(180deg,#9c6840,#6d4430);box-shadow:inset 0 18px 0 rgba(255,255,255,.08)}
+.garden-flowers{position:absolute;left:0;right:0;bottom:86px;height:220px;z-index:2}.garden-flower{position:absolute;bottom:0;width:42px;height:160px;transform:translateX(-50%) scale(var(--flower-scale));transform-origin:50% 100%;animation:flowerGrow .8s cubic-bezier(.2,1.2,.3,1) both}.flower-stem{position:absolute;left:50%;bottom:0;width:7px;height:100px;border-radius:99px;background:#5f8f57;transform:translateX(-50%);transform-origin:bottom;animation:stemGrow .72s ease both}.flower-head{position:absolute;left:50%;bottom:89px;transform:translateX(-50%) scale(0);font-size:48px;line-height:1;animation:bloomHead .55s .55s cubic-bezier(.2,1.4,.2,1) both}.flower-leaf{position:absolute;bottom:42px;width:26px;height:14px;border-radius:100% 0 100% 0;background:#73a56b;opacity:0;animation:leafPop .35s .62s ease both}.leaf-a{left:7px;transform:rotate(28deg)}.leaf-b{right:7px;transform:scaleX(-1) rotate(28deg)}
+.flower-rose .flower-head{color:#d98695}.flower-gold .flower-head{color:#e0ac50}.flower-sage .flower-head{color:#8fa16f}.flower-blue .flower-head{color:#809ab0}
+@keyframes stemGrow{from{height:0}to{height:100px}}@keyframes bloomHead{to{transform:translateX(-50%) scale(1)}}@keyframes leafPop{to{opacity:1}}@keyframes flowerGrow{from{opacity:0;filter:blur(2px)}to{opacity:1;filter:blur(0)}}
+.garden-complete-note{position:absolute;left:18px;right:18px;bottom:18px;padding:12px 14px;border-radius:18px;background:rgba(255,248,237,.78);border:1px dashed rgba(80,59,47,.18);text-align:center;font-weight:800;color:#6d4430;z-index:3}.garden-scene.complete .garden-complete-note{background:#fff8ed;box-shadow:0 12px 28px rgba(80,59,47,.12)}
+.butterfly{position:absolute;z-index:4;font-size:1.6rem;animation:butterflyFloat 3.8s ease-in-out infinite}.butterfly-1{left:20%;top:34%;animation-delay:0s}.butterfly-2{left:52%;top:22%;animation-delay:.6s}.butterfly-3{right:18%;top:42%;animation-delay:1.1s}@keyframes butterflyFloat{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-18px) rotate(10deg)}}
+
+/* V3 Recipe Card: bahan masuk ke mangkuk */
+.animated-recipe-layout{grid-template-columns:minmax(280px,380px) 1fr;align-items:start}.ingredient-list{display:grid;gap:10px}.ingredient-chip{display:flex;align-items:center;gap:10px;border:1px dashed rgba(80,59,47,.18);border-radius:16px;background:#fffaf0;color:#503b2f;padding:11px 13px;text-align:left;font-weight:800;transition:.2s ease}.ingredient-chip:hover{transform:translateY(-2px);box-shadow:0 10px 18px rgba(80,59,47,.10)}.ingredient-chip.used{opacity:.58;text-decoration:line-through;background:#f3e4cd}.recipe-mixing-area{display:grid;gap:16px}.mixing-bowl{position:relative;height:250px;border-radius:26px;background:linear-gradient(180deg,rgba(255,250,240,.74),rgba(242,217,184,.55));border:1px solid rgba(80,59,47,.12);overflow:hidden;box-shadow:0 16px 32px rgba(80,59,47,.10)}.bowl-rim{position:absolute;left:50%;bottom:92px;width:210px;height:42px;border-radius:50%;background:#fff7ed;border:7px solid #d98695;transform:translateX(-50%);z-index:3}.bowl-body{position:absolute;left:50%;bottom:34px;width:190px;height:90px;border-radius:0 0 86px 86px;background:linear-gradient(145deg,#f2b6bd,#d98695);transform:translateX(-50%);box-shadow:inset 0 -14px 0 rgba(80,59,47,.10);z-index:2}.bowl-fill{position:absolute;left:50%;bottom:78px;width:175px;height:0;border-radius:0 0 78px 78px;background:linear-gradient(180deg,#f7d887,#c9964f);transform:translateX(-50%);transition:.45s ease;z-index:1}.bowl-chip{position:absolute;bottom:116px;font-size:1.5rem;z-index:4;animation:chipDrop .55s cubic-bezier(.2,1.3,.3,1) both}@keyframes chipDrop{from{transform:translateY(-120px) rotate(-50deg);opacity:0}to{transform:translateY(0) rotate(0);opacity:1}}.steam{position:absolute;left:50%;bottom:158px;opacity:0;color:#d98695;font-size:1.6rem;z-index:5}.steam-one{margin-left:-48px}.steam-two{margin-left:-6px}.steam-three{margin-left:38px}.mixing-bowl.complete .steam{animation:steamRise 2s ease-in-out infinite}.mixing-bowl.complete .steam-two{animation-delay:.25s}.mixing-bowl.complete .steam-three{animation-delay:.5s}@keyframes steamRise{0%{transform:translateY(18px);opacity:0}30%{opacity:1}100%{transform:translateY(-35px);opacity:0}}.recipe-message{padding:16px;border-radius:18px;background:rgba(255,255,255,.22);border:1px dashed var(--border);font-weight:800;line-height:1.55}.recipe-card-steps{animation:fade .45s ease both}
+
+/* V3 Final Gift: buka pita, kue muncul, lilin ditiup */
+.animated-final-gift{text-align:center}.final-gift-stage{position:relative;min-height:300px;display:grid;place-items:center;margin:18px 0;border-radius:28px;background:radial-gradient(circle at 50% 38%,rgba(255,248,237,.84),transparent 30%),linear-gradient(180deg,rgba(242,182,189,.16),rgba(201,150,79,.10));border:1px dashed var(--border);overflow:hidden}.gift-box-anim{position:absolute;left:50%;bottom:54px;width:190px;height:160px;transform:translateX(-50%);transition:.6s ease}.gift-glow{position:absolute;left:50%;top:18px;width:160px;height:120px;border-radius:50%;background:rgba(247,211,119,.44);filter:blur(22px);transform:translateX(-50%) scale(.25);opacity:0;transition:.7s ease}.gift-lid{position:absolute;left:22px;top:0;width:146px;height:42px;border-radius:16px 16px 8px 8px;background:linear-gradient(145deg,#f2b6bd,#d98695);box-shadow:0 10px 18px rgba(80,59,47,.15);transform-origin:left bottom;z-index:3;transition:.65s cubic-bezier(.2,1.2,.3,1)}.gift-box-body{position:absolute;left:18px;right:18px;bottom:0;height:122px;border-radius:18px;background:linear-gradient(145deg,#f6c4cc,#c8798a);box-shadow:0 20px 34px rgba(80,59,47,.18);z-index:2}.gift-ribbon-anim{position:absolute;background:#fff8ed;z-index:4;box-shadow:inset 0 0 0 1px rgba(80,59,47,.10);transition:.45s ease}.gift-ribbon-anim.vertical{left:50%;bottom:0;width:28px;height:164px;transform:translateX(-50%)}.gift-ribbon-anim.horizontal{left:8px;right:8px;bottom:58px;height:28px}.gift-box-anim.open .gift-lid{transform:translate(-34px,-86px) rotate(-24deg)}.gift-box-anim.open .gift-ribbon-anim.vertical{opacity:0;transform:translateX(-50%) translateY(-25px) rotate(12deg)}.gift-box-anim.open .gift-ribbon-anim.horizontal{opacity:0;transform:translateY(-24px) rotate(-7deg)}.gift-box-anim.open .gift-glow{opacity:1;transform:translateX(-50%) scale(1.25)}.surprise-cake{position:absolute;left:50%;bottom:72px;width:180px;height:160px;transform:translateX(-50%);animation:cakeRise .72s cubic-bezier(.2,1.25,.3,1) both;z-index:5}.surprise-cake .cake-body{position:absolute;left:18px;right:18px;bottom:24px;height:78px;border-radius:22px 22px 18px 18px;background:linear-gradient(180deg,#fff0df 0 32%,#f2b6bd 32% 64%,#d98695 64%);box-shadow:0 18px 28px rgba(80,59,47,.18)}.surprise-cake .cake-plate{position:absolute;left:4px;right:4px;bottom:8px;height:22px;border-radius:50%;background:#fff8ed;border:1px solid rgba(80,59,47,.12)}.surprise-cake .candle{position:absolute;left:50%;top:16px;width:18px;height:54px;transform:translateX(-50%);border-radius:8px;background:repeating-linear-gradient(135deg,#fff8ed 0 8px,#d98695 8px 16px);z-index:2}.surprise-cake .flame{position:absolute;left:50%;top:-28px;width:22px;height:30px;border-radius:50% 50% 50% 0;background:linear-gradient(180deg,#fff6a8,#ff9b4a);transform:translateX(-50%) rotate(-45deg);animation:flameWiggle .6s ease-in-out infinite alternate;filter:drop-shadow(0 0 12px rgba(255,174,73,.85))}.surprise-cake .smoke{position:absolute;left:50%;top:-34px;opacity:0;color:#866b59;font-size:2rem;transform:translateX(-50%)}.surprise-cake.blown .flame{opacity:0;animation:none}.surprise-cake.blown .smoke{animation:smokeUp 1.3s ease-out both}@keyframes cakeRise{from{transform:translateX(-50%) translateY(80px) scale(.82);opacity:0}to{transform:translateX(-50%) translateY(0) scale(1);opacity:1}}@keyframes flameWiggle{to{transform:translateX(-50%) rotate(-35deg) scale(1.08)}}@keyframes smokeUp{0%{opacity:0;transform:translateX(-50%) translateY(10px)}30%{opacity:.75}100%{opacity:0;transform:translateX(-50%) translateY(-42px)}}.gift-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.final-title-reveal,.final-message-reveal{animation:fade .7s ease both}.final-message-reveal{white-space:pre-line}
+
+@media(max-width:900px){
+  .animated-kit-layout,.animated-seed-layout,.animated-recipe-layout{grid-template-columns:1fr!important}
+  .animated-kit-visual{min-height:340px}.kit-mood-scene{min-height:340px}.garden-scene{min-height:340px}.final-gift-stage{min-height:280px}
+}
+@media(max-width:560px){
+  .hijab-character{transform:translateX(-50%) scale(.88);bottom:62px}.hijab-character.mood-5{transform:translateX(-50%) translateY(-10px) scale(.88) rotate(1deg)}
+  .kit-mood-scene{min-height:310px}.garden-scene{min-height:330px}.garden-flowers{bottom:78px}.garden-flower{height:140px}.animated-recipe-layout{gap:14px}.mixing-bowl{height:220px}.final-gift-stage{min-height:260px}
+}

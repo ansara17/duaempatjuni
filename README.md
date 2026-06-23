@@ -1,8 +1,8 @@
-# Birthday Scrapbook Desk
+# Birthday Scrapbook Desk — Animated V3
 
-Project ucapan ulang tahun berbasis HTML, CSS, dan JavaScript modular.
+Versi ini adalah proyek HTML + CSS + JavaScript modular untuk ucapan ulang tahun berbentuk meja scrapbook interaktif.
 
-## Struktur
+## Struktur folder
 
 ```text
 index.html
@@ -12,20 +12,24 @@ js/app.js
 assets/images/
 assets/music/
 .nojekyll
+README.md
 ```
 
-## Bagian interaktif
+## Fitur utama
 
-- Polaroid Memories
-- Folded Birthday Letter
-- Little Survival Kit
-- Seed Packet
-- Recipe Card
-- Final Gift Box
+- Meja scrapbook dengan tekstur kayu yang lebih realistis.
+- Polaroid Memories.
+- Folded Birthday Letter.
+- Little Survival Kit dengan ilustrasi wanita berhijab pashmina yang ekspresinya berubah dari murung menjadi bahagia.
+- Seed Packet dengan taman bunga yang tumbuh saat benih diklik.
+- Recipe Card dengan bahan-bahan yang masuk ke mangkuk.
+- Final Gift bertahap: buka pita, kue muncul, tiup lilin, lalu pesan final muncul.
+- Mode malam.
+- Hidden heart.
+- Confetti.
+- Responsif untuk laptop dan HP.
 
-Kotak hadiah final akan terbuka setelah 5 benda utama dibuka.
-
-## Cara mengedit isi
+## Cara mengubah isi
 
 Edit file:
 
@@ -33,46 +37,58 @@ Edit file:
 js/config.js
 ```
 
-Di sana kamu bisa mengubah:
+Di sana Anda bisa mengganti:
 
-- nama penerima
-- judul dan subtitle
-- isi surat
-- caption foto
-- isi Little Survival Kit
-- isi Seed Packet
-- isi Recipe Card
-- pesan final
+- nama penerima;
+- judul pembuka;
+- isi surat;
+- caption foto;
+- isi Survival Kit;
+- isi Seed Packet;
+- isi Recipe Card;
+- pesan hadiah final.
 
-## Mengganti foto
+## Cara mengganti foto
 
-Masukkan file foto ke:
+Masukkan foto ke folder:
 
 ```text
 assets/images/
 ```
 
-Lalu ubah path di `js/config.js`, misalnya:
+Lalu sesuaikan path di `js/config.js`, misalnya:
 
 ```js
 src: "assets/images/foto1.jpg"
 ```
 
-## Efek suara klik
+## Efek klik
 
-Efek klik bersifat opsional. Jika ingin memakai efek klik, masukkan file:
+Efek klik bersifat opsional. Kalau ingin memakai, masukkan file:
 
 ```text
 assets/music/click.mp3
 ```
 
-Kalau tidak ada, scrapbook tetap berjalan normal.
+Kalau file tidak ada, halaman tetap berjalan normal.
 
-## Publish ke GitHub Pages
+## Cara upload ke GitHub Pages
 
-1. Upload seluruh isi folder ini ke repository GitHub.
-2. Pastikan `index.html` berada di root repository.
-3. Buka Settings > Pages.
-4. Pilih Source: Deploy from a branch.
-5. Pilih Branch: main dan folder: / root.
-6. Simpan, lalu tunggu link GitHub Pages aktif.
+Upload semua isi folder ini ke root repository GitHub, bukan folder pembungkusnya. Pastikan `index.html` berada langsung di root repository.
+
+Struktur yang benar:
+
+```text
+index.html
+css/
+js/
+assets/
+README.md
+.nojekyll
+```
+
+Lalu aktifkan GitHub Pages dari:
+
+```text
+Settings → Pages → Deploy from a branch → main → / root → Save
+```
