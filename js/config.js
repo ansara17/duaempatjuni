@@ -11,15 +11,15 @@ window.SCRAPBOOK_CONFIG = {
   pageTitle: "Meja Kenangan Ulang Tahun",
   introTitle: "A Little Birthday Desk for Akmelia",
   introSubtitle: "Sebuah meja kecil berisi potongan kenangan, surat, bekal kecil, benih harapan, resep bahagia, dan hadiah yang bisa kamu buka satu per satu.",
-  deskTitle: "Pilih benda mana yang ingin kamu buka dulu",
+  deskTitle: "Pilih benda mana yang mau kamu buka dulu TAPI satu satu ya ges ya",
 
   clickSound: "assets/music/click.mp3",
 
   // Masukkan file MP3 ke assets/music, lalu samakan nama file di bawah ini.
   tracks: [
-    { title: "Lagu Pertama", file: "assets/music/lagu1.mp3" },
-    { title: "Lagu Kedua", file: "assets/music/lagu2.mp3" },
-    { title: "Lagu Ketiga", file: "assets/music/lagu3.mp3" }
+    { title: "Lagu Kamuh", file: "assets/music/lagu1.mp3" },
+    { title: "Lagu Kamuhhh Lagihh", file: "assets/music/lagu2.mp3" },
+    { title: "Lagu Akuhh tp buat kamuhh juga", file: "assets/music/lagu3.mp3" }
   ],
 
   requiredToUnlockGift: 5,
@@ -34,16 +34,16 @@ window.SCRAPBOOK_CONFIG = {
 
   memories: [
     {
-      src: "assets/images/photo-1.svg",
-      caption: "momen sederhana yang tetap hangat"
+      src: "assets/images/foto1.jpg",
+      caption: "buset bocil bet ini"
     },
     {
-      src: "assets/images/photo-2.svg",
-      caption: "salah satu potongan hari yang aku simpan"
+      src: "assets/images/foto2.jpg",
+      caption: "ini udah agak bocil gede"
     },
     {
-      src: "assets/images/photo-3.svg",
-      caption: "foto kecil, artinya tidak kecil"
+      src: "assets/images/foto3.jpg",
+      caption: "nah ini pas udah gede tp kenapa begini??"
     }
   ],
 
@@ -133,7 +133,7 @@ window.SCRAPBOOK_CONFIG = {
     ingredientsTitle: "Bahan-bahan",
     ingredients: [
       "2 sendok keberanian untuk mencoba lagi",
-      "1 genggam ketenangan untuk hari yang ramai",
+      "1 genggam ketenangan untuk hari yang sibuk",
       "secukupnya orang-orang tulus di sekitar kamu",
       "banyak senyum kecil yang tidak harus punya alasan besar",
       "istirahat yang cukup, jangan diganti dengan memaksa diri terus",
@@ -163,6 +163,6 @@ window.SCRAPBOOK_CONFIG = {
 
   secret: {
     unlockedAfter: 3,
-    message: "Pesan rahasia terbuka: ternyata ada banyak hal kecil di dunia ini yang bisa mengingatkanku pada kamu."
+    message: "Pesan rahasia terbuka: ternyata ada banyak hal kecil di dunia ini yang bisa mengingatkanku samu kamu el dui."
   }
 };
