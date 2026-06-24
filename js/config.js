@@ -9,7 +9,7 @@
 window.SCRAPBOOK_CONFIG = {
   recipient: "Akmelia Zahra",
   pageTitle: "Meja Kenangan Ulang Tahun",
-  introTitle: "A Little Birthday Desk for Akmelia",
+  introTitle: "A Little Birthday Desk for Akmelia alias El Dui",
   introSubtitle: "Sebuah meja kecil berisi potongan kenangan, surat, bekal kecil, benih harapan, resep bahagia, dan hadiah yang bisa kamu buka satu per satu.",
   deskTitle: "Pilih benda mana yang mau kamu buka dulu TAPI satu satu ya ges ya",
 
@@ -43,7 +43,7 @@ window.SCRAPBOOK_CONFIG = {
     },
     {
       src: "assets/images/foto3.jpg",
-      caption: "nah ini pas udah gede tp kenapa begini??"
+      caption: "ini pas udah gede tp kenapa begini yak??"
     }
   ],
 
@@ -157,7 +157,7 @@ window.SCRAPBOOK_CONFIG = {
     beforeBlow: "Buka pitanya dulu, lalu tiup lilin kecil yang muncul dari dalam kotak.",
     openButton: "Buka pitanya 🎀",
     blowButton: "Tiup lilin ✨",
-    afterBlowTitle: "Selamat ulang tahun, Akmelia Zahra",
+    afterBlowTitle: "Selamat ulang tahun, Akmelia Zahra anak dari Mamah Kartini",
     message: "Semoga umur barumu membawa lebih banyak tenang, lebih banyak bahagia, dan lebih banyak alasan untuk percaya bahwa hidup masih menyimpan banyak hal baik untukmu.\n\nTerima kasih sudah tetap menjadi kamu. Hari ini, semoga kamu merasa dirayakan dengan cara yang paling hangat."
   },
 
