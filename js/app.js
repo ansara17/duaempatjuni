@@ -280,7 +280,7 @@
     openModal(`
       <p class="eyebrow">polaroid memories</p>
       <h2 class="modal-title">Potongan kecil yang tersimpan</h2>
-      <p class="modal-subtitle">Beberapa foto bisa diganti dari folder <strong>assets/images</strong>. Klik foto untuk melihat lebih dekat.</p>
+      <p class="modal-subtitle">Klik foto untuk melihat lebih dekat.</p>
       <div class="polaroid-grid">${cards}</div>
     `);
 
